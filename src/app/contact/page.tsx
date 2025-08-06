@@ -9,8 +9,8 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Mail, MessageSquare, Phone, MapPin, Clock, Send, CheckCircle, Globe, Users } from 'lucide-react'
-import { Header } from '@/components/header'
-import { Footer } from '@/components/footer'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
 import { useToast } from '@/hooks/use-toast'
 
 const fadeInUp = {
@@ -119,7 +119,7 @@ export default function ContactPage() {
                 Get in Touch
               </h1>
               <p className="text-xl lg:text-2xl text-slate-600 dark:text-slate-300 leading-relaxed">
-                Have questions about our service? Need help with integration? We're here to help.
+                Have questions about our service? Need help with integration? We&apos;re here to help.
               </p>
             </motion.div>
           </div>
@@ -176,7 +176,7 @@ export default function ContactPage() {
                       Send us a Message
                     </CardTitle>
                     <p className="text-slate-600 dark:text-slate-300">
-                      Fill out the form below and we'll get back to you as soon as possible.
+                      Fill out the form below and we&apos;ll get back to you as soon as possible.
                     </p>
                   </CardHeader>
                   <CardContent className="p-8">

@@ -1,5 +1,3 @@
-'use client'
-
 import { Mail, Github, Twitter, Heart } from 'lucide-react'
 import Link from 'next/link'
 
@@ -13,28 +11,21 @@ export function Footer() {
     ],
     Company: [
       { name: 'About', href: '/about' },
-      { name: 'Blog', href: '/blog' },
-      { name: 'Careers', href: '/careers' },
       { name: 'Contact', href: '/contact' },
+      { name: 'Pricing', href: '/premium' },
+      { name: 'API Docs', href: '/api' },
     ],
     Legal: [
-      { name: 'Privacy Policy', href: '/privacy' },
-      { name: 'Terms of Service', href: '/terms' },
-      { name: 'Cookie Policy', href: '/cookies' },
-      { name: 'GDPR', href: '/gdpr' },
-    ],
-    Support: [
-      { name: 'Help Center', href: '/help' },
-      { name: 'Community', href: '/community' },
-      { name: 'Contact Support', href: '/support' },
-      { name: 'System Status', href: '/status' },
+      { name: 'Privacy Policy', href: '/privacy-policy' },
+      { name: 'Terms of Service', href: '/terms-of-service' },
+      { name: 'Cookie Policy', href: '/cookie-policy' },
     ],
   }
 
   return (
     <footer className="bg-slate-900 dark:bg-slate-950 text-white">
       <div className="container mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
@@ -44,14 +35,14 @@ export function Footer() {
               <span className="text-xl font-bold">TempMail Pro</span>
             </div>
             <p className="text-slate-400 mb-6 max-w-md">
-              Secure, private temporary email addresses. Protect your privacy online with our 
+              Secure, private temporary email addresses. Protect your privacy online with our
               reliable disposable email service.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-slate-400 hover:text-white transition-colors">
+              <a href="#" aria-label="Twitter" className="text-slate-400 hover:text-white transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors">
+              <a href="#" aria-label="GitHub" className="text-slate-400 hover:text-white transition-colors">
                 <Github className="w-5 h-5" />
               </a>
             </div>
@@ -64,7 +55,7 @@ export function Footer() {
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.name}>
-                    <Link 
+                    <Link
                       href={link.href}
                       className="text-slate-400 hover:text-white transition-colors text-sm"
                     >
@@ -79,7 +70,7 @@ export function Footer() {
 
         <div className="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-slate-400 text-sm">
-            © 2024 TempMail Pro. All rights reserved.
+            © {new Date().getFullYear()} TempMail Pro. All rights reserved.
           </p>
           <p className="text-slate-400 text-sm flex items-center mt-4 md:mt-0">
             Made with <Heart className="w-4 h-4 mx-1 text-red-500" /> for privacy

@@ -50,8 +50,8 @@ export default function NotFound() {
               transition={{ delay: 0.5 }}
               className="text-slate-600 dark:text-slate-400 mb-8 text-lg"
             >
-              Oops! The page you're looking for seems to have vanished into the digital void.
-              Don't worry, your temporary emails are still safe and sound.
+              Oops! The page you&apos;re looking for seems to have vanished into the digital void.
+              Don&apos;t worry, your temporary emails are still safe and sound.
             </motion.p>
 
             <motion.div
@@ -82,7 +82,7 @@ export default function NotFound() {
               className="mt-8 pt-8 border-t border-slate-200 dark:border-slate-700"
             >
               <p className="text-sm text-slate-500 dark:text-slate-400">
-                Need help? Try searching for what you're looking for or contact our support team.
+                Need help? Try searching for what you&apos;re looking for or contact our support team.
               </p>
             </motion.div>
           </CardContent>

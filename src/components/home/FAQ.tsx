@@ -43,7 +43,7 @@ export function FAQ() {
   ]
 
   return (
-    <section className="py-24 lg:py-32 bg-white dark:bg-slate-900">
+    <section className="py-16 lg:py-24 bg-white dark:bg-slate-900">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-16"

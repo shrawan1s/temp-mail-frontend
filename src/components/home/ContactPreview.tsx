@@ -16,7 +16,7 @@ const fadeInUp = {
 
 export function ContactPreview() {
   return (
-    <section className="py-24 lg:py-32 bg-gradient-to-br from-slate-50 to-blue-50/30 dark:from-slate-900 dark:to-blue-950/30">
+    <section className="py-16 lg:py-24 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
@@ -30,7 +30,7 @@ export function ContactPreview() {
             </h2>
             <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
               Have questions about our service? Need help with integration?
-              Want to provide feedback? We'd love to hear from you.
+              Want to provide feedback? We&apos;d love to hear from you.
             </p>
 
             <div className="space-y-4 mb-8">
@@ -55,11 +55,9 @@ export function ContactPreview() {
               </div>
             </div>
 
-            <Link href="/contact">
-              <Button className="bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700">
-                <MessageSquare className="w-4 h-4 mr-2" />
-                View Full Contact Page
-              </Button>
+            <Link href="/contact" className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline mb-6">
+              <MessageSquare className="w-5 h-5 mr-2" />
+              View Full Contact Page
             </Link>
           </motion.div>
 
@@ -92,7 +90,7 @@ export function ContactPreview() {
                 </form>
 
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-4 text-center">
-                  We'll get back to you within 24 hours
+                  We&apos;ll get back to you within 24 hours
                 </p>
               </CardContent>
             </Card>

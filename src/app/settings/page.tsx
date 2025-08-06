@@ -11,7 +11,7 @@ import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
 import { Settings, Moon, Sun, Clock, Shield, Bell, Trash2, Crown, Mail } from 'lucide-react'
-import { Header } from '@/components/header'
+import { Header } from '@/components/layout/Header'
 import { useToast } from '@/hooks/use-toast'
 
 export default function SettingsPage() {

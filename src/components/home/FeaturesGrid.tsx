@@ -2,7 +2,24 @@
 
 import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
-import { RefreshCw, Globe, Paperclip, Shield, Zap, Mail, Clock, Users, Code, Star, Crown, Lock } from 'lucide-react'
+import {
+  RefreshCw,
+  Globe,
+  Paperclip,
+  Shield,
+  Zap,
+  Mail,
+  Clock,
+  Users,
+  Code,
+  Star,
+  Crown,
+  Lock,
+  ShieldAlert,
+  BrainCircuit,
+  Tag,
+  FileText
+} from 'lucide-react'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 24 },
@@ -27,9 +44,38 @@ export function FeaturesGrid() {
       color: 'from-blue-500 to-cyan-500'
     },
     {
+      icon: ShieldAlert,
+      title: 'AI Spam Filter',
+      description: 'Advanced AI filters out malicious and spam emails',
+      color: 'from-red-500 to-pink-500'
+    },
+    {
+      icon: BrainCircuit,
+      title: 'Intent Detection',
+      description: 'AI detects email intent: login, OTP, newsletter, etc.',
+      color: 'from-purple-500 to-fuchsia-500',
+      premium: true
+    },
+    {
+      icon: Tag,
+      title: 'Smart Labels',
+      description: 'Auto-labels emails to keep your inbox organized',
+      color: 'from-indigo-500 to-violet-500',
+      premium: true,
+      upcoming: true
+    },
+    {
+      icon: FileText,
+      title: 'AI Summarizer',
+      description: 'Summarize long emails in seconds with AI',
+      color: 'from-amber-500 to-orange-500',
+      premium: true,
+      upcoming: true
+    },
+    {
       icon: Globe,
       title: 'Custom Domain',
-      description: 'Use your own domain for professional appearance',
+      description: 'Use your own domain for a professional appearance',
       color: 'from-green-500 to-emerald-500',
       premium: true
     },
@@ -37,47 +83,35 @@ export function FeaturesGrid() {
       icon: Paperclip,
       title: 'Attachment Support',
       description: 'Receive and view email attachments securely',
-      color: 'from-purple-500 to-violet-500'
-    },
-    {
-      icon: Shield,
-      title: 'Privacy First',
-      description: 'No tracking, no data collection, complete anonymity',
-      color: 'from-red-500 to-pink-500'
-    },
-    {
-      icon: Clock,
-      title: 'Flexible Expiry',
-      description: 'Set custom expiration times for your emails',
-      color: 'from-amber-500 to-orange-500'
+      color: 'from-yellow-500 to-orange-500'
     },
     {
       icon: Lock,
       title: 'Secure Headers',
-      description: 'Advanced security with encrypted email headers',
-      color: 'from-indigo-500 to-purple-500',
+      description: 'Encrypted email headers for added security',
+      color: 'from-slate-500 to-gray-500',
       premium: true
     },
     {
       icon: Code,
       title: 'API Access',
-      description: 'Integrate with your apps using our REST API',
-      color: 'from-slate-500 to-gray-500',
+      description: 'Integrate inbox features with your own apps',
+      color: 'from-pink-500 to-rose-500',
       premium: true
     },
     {
       icon: Zap,
       title: 'Lightning Fast',
       description: 'Emails delivered in under 5 seconds worldwide',
-      color: 'from-yellow-500 to-amber-500'
+      color: 'from-yellow-400 to-yellow-600'
     }
   ]
 
   return (
-    <section className="py-24 lg:py-32 bg-gradient-to-br from-slate-50 to-blue-50/50 dark:from-slate-900 dark:to-blue-950/50">
+    <section className="py-16 lg:py-24 bg-white dark:bg-slate-900" id="features">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-10"
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
@@ -87,7 +121,7 @@ export function FeaturesGrid() {
             Powerful Features
           </h2>
           <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Everything you need for secure, temporary email management
+            Everything you need for secure, smart, and private email management
           </p>
         </motion.div>
 
@@ -101,11 +135,23 @@ export function FeaturesGrid() {
           {features.map((feature, index) => (
             <motion.div key={index} variants={fadeInUp}>
               <Card className="relative h-full border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden">
+
+                {/* Pro badge */}
                 {feature.premium && (
                   <div className="absolute top-3 right-3 z-10">
                     <div className="flex items-center space-x-1 bg-gradient-to-r from-amber-400 to-orange-400 text-white px-2 py-1 rounded-full text-xs font-medium">
                       <Crown className="w-3 h-3" />
                       <span>Pro</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Coming Soon badge */}
+                {feature.upcoming && (
+                  <div className="absolute top-3 left-3 z-10">
+                    <div className="flex items-center space-x-1 bg-slate-300/30 dark:bg-slate-700/40 text-slate-700 dark:text-white px-2 py-1 rounded-full text-xs font-medium backdrop-blur">
+                      <Clock className="w-3 h-3" />
+                      <span>Coming Soon</span>
                     </div>
                   </div>
                 )}
