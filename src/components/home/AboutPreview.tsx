@@ -7,33 +7,48 @@ import { Badge } from '@/components/ui/badge'
 import { Shield, Code, Users, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
+// Framer variants
 const fadeInUp = {
   initial: { opacity: 0, y: 24 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }
 }
 
+// A slow floating animation for blobs
+const float = {
+  animate: {
+    y: [0, -10, 0],
+    transition: { duration: 6, ease: 'easeInOut', repeat: Infinity }
+  }
+}
+
 export function AboutPreview() {
-  const techStack = [
-    'NestJS', 'PostgreSQL', 'Redis', 'Weaviate', 'TypeScript', 'Docker'
-  ]
+  const techStack = ['NestJS', 'PostgreSQL', 'Redis', 'Weaviate', 'TypeScript', 'Docker']
 
   return (
-    <section className="py-24 lg:py-32 bg-white dark:bg-slate-900">
+    <section className="relative py-16 lg:py-24 bg-white dark:bg-slate-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Text */}
           <motion.div
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <Badge className="mb-6 px-3 py-1 bg-gradient-to-r from-blue-600/10 to-violet-600/10 text-blue-700 dark:text-blue-300 border-blue-200/50 dark:border-blue-700/50">
-              <Shield className="w-4 h-4 mr-2" />
+            <Badge
+              className="
+                mb-6 px-3 py-1 text-sm font-medium
+                bg-blue-50 dark:bg-blue-900
+                text-blue-700 dark:text-blue-200
+                border border-blue-100 dark:border-blue-800
+              "
+            >
+              <Shield className="w-4 h-4 mr-2 inline" />
               Privacy by Design
             </Badge>
 
-            <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-6">
+            <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
               Built for Privacy,
               <br />
               <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
@@ -42,14 +57,14 @@ export function AboutPreview() {
             </h2>
 
             <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
-              We believe privacy should be simple and accessible. Our platform is built
-              with modern technologies and security best practices to ensure your
-              temporary emails are completely private and secure.
+              We believe privacy should be simple and accessible. Our platform is built with modern
+              technologies and security best practices to ensure your temporary emails are completely
+              private and secure.
             </p>
 
             <div className="grid grid-cols-2 gap-6 mb-8">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center shadow-md">
                   <Users className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -58,7 +73,7 @@ export function AboutPreview() {
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center shadow-md">
                   <Code className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -73,8 +88,16 @@ export function AboutPreview() {
                 Built with modern technologies:
               </p>
               <div className="flex flex-wrap gap-2">
-                {techStack.map((tech) => (
-                  <Badge key={tech} variant="secondary" className="text-xs">
+                {techStack.map(tech => (
+                  <Badge
+                    key={tech}
+                    className="
+                      text-xs px-2 py-1
+                      bg-slate-100 dark:bg-slate-800
+                      text-slate-800 dark:text-slate-200
+                      border border-slate-200 dark:border-slate-700
+                    "
+                  >
                     {tech}
                   </Badge>
                 ))}
@@ -82,13 +105,14 @@ export function AboutPreview() {
             </div>
 
             <Link href="/about">
-              <Button className="bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 group">
+              <Button className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-lg hover:from-blue-700 hover:to-violet-700 transition-all">
                 Learn More About Us
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                <ArrowRight className="w-4 h-4" />
               </Button>
             </Link>
           </motion.div>
 
+          {/* Right Card */}
           <motion.div
             initial="initial"
             whileInView="animate"

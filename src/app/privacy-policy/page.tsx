@@ -1,28 +1,15 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import { Separator } from '@/components/ui/separator'
-import { Shield, Eye, Lock, Globe } from 'lucide-react'
-import { Header } from '@/components/header'
-import { Footer } from '@/components/footer'
-
-const fadeInUp = {
-  initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }
-}
+import { Shield } from 'lucide-react'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
 
 export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900">
       <Header />
-
       <main className="pt-24">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <motion.div
-            initial="initial"
-            animate="animate"
-            variants={fadeInUp}
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+          <div
             className="mb-12"
           >
             <div className="flex items-center space-x-3 mb-6">
@@ -32,21 +19,17 @@ export default function PrivacyPolicyPage() {
               </h1>
             </div>
             <p className="text-lg text-slate-600 dark:text-slate-300">
-              Last updated: December 2024
+              Last updated: August 2025
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial="initial"
-            animate="animate"
-            variants={fadeInUp}
+          <div
             className="prose prose-lg dark:prose-invert max-w-none"
           >
             <Separator className="mb-8" />
 
             <h2 className="flex items-center text-2xl font-bold text-slate-900 dark:text-white mb-4">
-              <Eye className="w-6 h-6 mr-2 text-blue-600" />
-              Information We Collect
+              1. Information We Collect
             </h2>
 
             <p className="text-slate-600 dark:text-slate-300 mb-6">
@@ -62,8 +45,7 @@ export default function PrivacyPolicyPage() {
             </ul>
 
             <h2 className="flex items-center text-2xl font-bold text-slate-900 dark:text-white mb-4">
-              <Lock className="w-6 h-6 mr-2 text-blue-600" />
-              How We Use Your Information
+              2. How We Use Your Information
             </h2>
 
             <p className="text-slate-600 dark:text-slate-300 mb-6">
@@ -78,7 +60,7 @@ export default function PrivacyPolicyPage() {
               <li>Process payments for Pro subscriptions</li>
             </ul>
 
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Data Retention</h2>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">3. Data Retention</h2>
 
             <p className="text-slate-600 dark:text-slate-300 mb-6">
               We automatically delete data based on your selected retention period:
@@ -91,7 +73,7 @@ export default function PrivacyPolicyPage() {
               <li><strong>Payment Information:</strong> Retained as required by law and payment processors</li>
             </ul>
 
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Data Sharing</h2>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">4. Data Sharing</h2>
 
             <p className="text-slate-600 dark:text-slate-300 mb-6">
               We do not sell, trade, or share your personal information with third parties, except:
@@ -105,8 +87,7 @@ export default function PrivacyPolicyPage() {
             </ul>
 
             <h2 className="flex items-center text-2xl font-bold text-slate-900 dark:text-white mb-4">
-              <Globe className="w-6 h-6 mr-2 text-blue-600" />
-              International Data Transfers
+              5. International Data Transfers
             </h2>
 
             <p className="text-slate-600 dark:text-slate-300 mb-8">
@@ -114,7 +95,7 @@ export default function PrivacyPolicyPage() {
               international transfers comply with applicable privacy laws including GDPR and CCPA.
             </p>
 
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Your Rights</h2>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">6. Your Rights</h2>
 
             <p className="text-slate-600 dark:text-slate-300 mb-6">
               You have the right to:
@@ -129,7 +110,7 @@ export default function PrivacyPolicyPage() {
               <li>Lodge a complaint with supervisory authorities</li>
             </ul>
 
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Security Measures</h2>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">7. Security Measures</h2>
 
             <p className="text-slate-600 dark:text-slate-300 mb-8">
               We implement industry-standard security measures including encryption in transit and at rest,
@@ -137,7 +118,7 @@ export default function PrivacyPolicyPage() {
               transmission over the internet is 100% secure.
             </p>
 
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Changes to This Policy</h2>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">8. Changes to This Policy</h2>
 
             <p className="text-slate-600 dark:text-slate-300 mb-8">
               We may update this privacy policy from time to time. We will notify users of significant
@@ -145,7 +126,7 @@ export default function PrivacyPolicyPage() {
               constitutes acceptance of the new policy.
             </p>
 
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Contact Us</h2>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">9. Contact Us</h2>
 
             <p className="text-slate-600 dark:text-slate-300 mb-4">
               If you have questions about this privacy policy or our privacy practices, please contact us:
@@ -155,7 +136,7 @@ export default function PrivacyPolicyPage() {
               <li>Email: privacy@tempmail.pro</li>
               <li>Address: Privacy Officer, TempMail Pro, San Francisco, CA</li>
             </ul>
-          </motion.div>
+          </div>
         </div>
       </main>
 

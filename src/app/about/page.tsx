@@ -5,8 +5,8 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Shield, Code, Users, Globe, Zap, Heart, Database, Server, Cloud, Lock } from 'lucide-react'
-import { Header } from '@/components/header'
-import { Footer } from '@/components/footer'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 24 },
@@ -112,7 +112,7 @@ export default function AboutPage() {
                 </p>
 
                 <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
-                  Whether you're a developer testing email workflows, a privacy-conscious individual
+                  Whether you&apos;re a developer testing email workflows, a privacy-conscious individual
                   signing up for services, or a QA tester managing multiple accounts, we provide the
                   tools you need without compromising your personal data.
                 </p>

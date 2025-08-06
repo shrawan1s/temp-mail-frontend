@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
 import { RefreshCw, Copy, Trash2, Clock, Mail, Shield, AlertTriangle, Tag, Settings } from 'lucide-react'
-import { Header } from '@/components/header'
+import { Header } from '@/components/layout/Header'
 import { useToast } from '@/hooks/use-toast'
 
 interface Email {
@@ -179,8 +179,8 @@ export default function InboxPage() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 20 }}
                         className={`p-4 cursor-pointer border-l-4 transition-all hover:bg-slate-50 dark:hover:bg-slate-800 ${selectedEmail?.id === email.id
-                            ? 'bg-blue-50 dark:bg-blue-950 border-l-blue-500'
-                            : 'border-l-transparent'
+                          ? 'bg-blue-50 dark:bg-blue-950 border-l-blue-500'
+                          : 'border-l-transparent'
                           }`}
                         onClick={() => setSelectedEmail(email)}
                       >

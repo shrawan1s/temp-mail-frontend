@@ -44,10 +44,10 @@ export function HowItWorks() {
   ]
 
   return (
-    <section className="py-24 lg:py-32 bg-white dark:bg-slate-900">
+    <section className="py-16 lg:py-24 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-10"
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
@@ -71,7 +71,7 @@ export function HowItWorks() {
           <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
             {steps.map((step, index) => (
               <motion.div key={step.step} variants={fadeInUp} className="relative">
-                <Card className="relative h-full border-0 bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-850 shadow-xl hover:shadow-2xl transition-all duration-300 group">
+                <Card className="relative h-full border-0 bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-850 shadow-xl hover:shadow-2xl transition-transform duration-300 group hover:scale-[1.02]">
                   <CardContent className="p-8">
                     <div className="relative mb-8">
                       <div className={`w-16 h-16 bg-gradient-to-r ${step.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
@@ -84,7 +84,7 @@ export function HowItWorks() {
                       </div>
                     </div>
 
-                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                    <h3 className="text-xl tracking-wide uppercase font-semibold text-slate-900 dark:text-white mb-4">
                       {step.title}
                     </h3>
                     <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
@@ -97,7 +97,7 @@ export function HowItWorks() {
                 {index < steps.length - 1 && (
                   <div className="hidden lg:block absolute top-1/2 -right-6 transform -translate-y-1/2 z-10">
                     <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full shadow-lg flex items-center justify-center border border-slate-200 dark:border-slate-700">
-                      <ArrowRight className="w-5 h-5 text-slate-400 dark:text-slate-500" />
+                      <ArrowRight className="w-5 h-5 text-blue-500 group-hover:scale-110 transition-transform" />
                     </div>
                   </div>
                 )}

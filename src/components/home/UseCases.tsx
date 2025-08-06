@@ -26,7 +26,8 @@ export function UseCases() {
     {
       icon: Code,
       title: 'Developers',
-      description: 'Test email flows, API integrations, and user registration without cluttering your inbox',
+      description:
+        'Test email flows, API integrations, and user registration without cluttering your inbox',
       badge: 'API Ready',
       color: 'from-blue-500 to-cyan-500',
       features: ['API Integration', 'Webhook Support', 'Bulk Generation', 'Custom Domains']
@@ -34,7 +35,8 @@ export function UseCases() {
     {
       icon: UserCheck,
       title: 'Secure Sign-ups',
-      description: 'Protect your real email when signing up for services, newsletters, or one-time verifications',
+      description:
+        'Protect your real email when signing up for services, newsletters, or one-time verifications',
       badge: 'Privacy First',
       color: 'from-green-500 to-emerald-500',
       features: ['No Tracking', 'Auto Expiry', 'Spam Protection', 'Anonymous']
@@ -42,7 +44,8 @@ export function UseCases() {
     {
       icon: TestTube,
       title: 'QA & Testers',
-      description: 'Create multiple test accounts, verify email workflows, and test user journeys efficiently',
+      description:
+        'Create multiple test accounts, verify email workflows, and test user journeys efficiently',
       badge: 'Team Ready',
       color: 'from-purple-500 to-violet-500',
       features: ['Multiple Emails', 'Team Sharing', 'Test Automation', 'Bulk Actions']
@@ -50,10 +53,11 @@ export function UseCases() {
   ]
 
   return (
-    <section className="py-24 lg:py-32 bg-white dark:bg-slate-900">
+    <section className="py-16 lg:py-24 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-10"
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
@@ -63,10 +67,11 @@ export function UseCases() {
             Perfect for Every Use Case
           </h2>
           <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Whether you're a developer, privacy-conscious user, or QA tester, we've got you covered
+            Whether you&apos;re a developer, privacy-conscious user, or QA tester, we&apos;ve got you covered
           </p>
         </motion.div>
 
+        {/* Cards Grid */}
         <motion.div
           className="grid lg:grid-cols-3 gap-8 lg:gap-12"
           initial="initial"
@@ -76,11 +81,14 @@ export function UseCases() {
         >
           {useCases.map((useCase, index) => (
             <motion.div key={index} variants={fadeInUp}>
-              <Card className="h-full border-0 bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-850 shadow-xl hover:shadow-2xl transition-all duration-300 group">
-                <CardContent className="p-8">
-                  <div className="mb-6">
+              <Card className="h-full border-0 bg-white dark:bg-slate-800 shadow-xl hover:shadow-2xl transition-all duration-300 group">
+                <CardContent className="p-8 flex flex-col justify-between h-full">
+                  {/* Top: Icon + Badge + Text */}
+                  <div>
                     <div className="flex items-center justify-between mb-4">
-                      <div className={`w-14 h-14 bg-gradient-to-r ${useCase.color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                      <div
+                        className={`w-14 h-14 bg-gradient-to-br ${useCase.color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
+                      >
                         <useCase.icon className="w-7 h-7 text-white" />
                       </div>
                       <Badge variant="secondary" className="text-xs font-medium">
@@ -91,26 +99,31 @@ export function UseCases() {
                     <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
                       {useCase.title}
                     </h3>
-                    <p className="text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
+                    <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
                       {useCase.description}
                     </p>
                   </div>
 
-                  <div className="space-y-3 mb-8">
-                    {useCase.features.map((feature, featureIndex) => (
-                      <div key={featureIndex} className="flex items-center text-sm text-slate-600 dark:text-slate-300">
-                        <div className="w-1.5 h-1.5 bg-gradient-to-r from-blue-500 to-violet-500 rounded-full mr-3"></div>
-                        {feature}
-                      </div>
-                    ))}
+                  {/* Bottom: Feature List + Button */}
+                  <div>
+                    <div className="space-y-3 mb-6">
+                      {useCase.features.map((feat, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-center text-sm text-slate-600 dark:text-slate-300"
+                        >
+                          <div className="w-1.5 h-1.5 bg-gradient-to-r from-blue-500 to-violet-500 rounded-full mr-3" />
+                          {feat}
+                        </div>
+                      ))}
+                    </div>
+                    <Link href="/inbox">
+                      <Button className="w-full bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white transition-all duration-300">
+                        Get Started
+                        <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </Button>
+                    </Link>
                   </div>
-
-                  <Link href="/inbox">
-                    <Button className="w-full bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 group/btn">
-                      Get Started
-                      <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                    </Button>
-                  </Link>
                 </CardContent>
               </Card>
             </motion.div>
