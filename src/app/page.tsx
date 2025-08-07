@@ -1,6 +1,6 @@
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
-import HeroSection from '@/components/home/HeroSection';
+import { HeroSection } from '@/components/home/HeroSection';
 import { HowItWorks } from '@/components/home/HowItWorks';
 import { FeaturesGrid } from '@/components/home/FeaturesGrid';
 import { UseCases } from '@/components/home/UseCases';

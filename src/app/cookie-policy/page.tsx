@@ -1,8 +1,7 @@
-import { Separator } from '@/components/ui/separator'
-import { Cookie } from 'lucide-react'
-import { Header } from '@/components/layout/Header'
-import { Footer } from '@/components/layout/Footer'
-import Link from 'next/link'
+import { Separator } from '@/components/ui/separator';
+import { Cookie } from 'lucide-react';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 
 export default function PrivacyPolicyPage() {
     return (
@@ -32,13 +31,6 @@ export default function PrivacyPolicyPage() {
                         <p className="text-slate-600 dark:text-slate-300 mb-6">
                             Cookies are small text files stored on your device by your browser. They help websites remember your preferences and improve your experience.
                         </p>
-
-                        {/* <ul className="space-y-2 text-slate-600 dark:text-slate-300 mb-8">
-                            <li><strong>Temporary Email Addresses:</strong> We generate and temporarily store email addresses for the duration you specify</li>
-                            <li><strong>Email Content:</strong> We temporarily store incoming emails only until expiration</li>
-                            <li><strong>Usage Analytics:</strong> Basic anonymized usage statistics to improve our service</li>
-                            <li><strong>Account Information:</strong> For Pro users, we store email and payment information securely</li>
-                        </ul> */}
 
                         <h2 className="flex items-center text-2xl font-bold text-slate-900 dark:text-white mb-4">
                             2. How We Use Cookies
@@ -103,9 +95,9 @@ export default function PrivacyPolicyPage() {
 
                         <p className="text-slate-600 dark:text-slate-300 mb-8">
                             For questions about cookies, contact us at{' '}
-                            <Link href="mailto:privacy@tempmail.pro" className="text-blue-600 hover:underline">
-                                privacy@tempmail.pro
-                            </Link>.
+                            <a href="mailto:info@svinfocraft.com" className="text-blue-600 hover:underline">
+                                info@svinfocraft.com
+                            </a>.
                         </p>
                     </div>
                 </div>

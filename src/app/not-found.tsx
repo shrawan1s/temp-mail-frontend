@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { Mail, Home, ArrowLeft, Search } from 'lucide-react'
-import Link from 'next/link'
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Mail, Home } from 'lucide-react';
+import Link from 'next/link';
 
 export default function NotFound() {
   return (

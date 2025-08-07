@@ -5,20 +5,59 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { MessageSquare, Send, Mail, Phone } from 'lucide-react'
+import { MessageSquare, Send, Mail } from 'lucide-react'
 import Link from 'next/link'
 
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from 'sonner'
+
+// Animation variant
 const fadeInUp = {
   initial: { opacity: 0, y: 24 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }
 }
 
+// Validation schema
+const schema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Invalid email address'),
+  message: z.string().min(10, 'Message must be at least 10 characters'),
+})
+
+type FormData = z.infer<typeof schema>
+
 export function ContactPreview() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    mode: 'onBlur'
+  })
+
+  const onSubmit = async (data: FormData) => {
+    await new Promise((resolve) => setTimeout(() => {
+      console.log("Form Data: ", data);
+      resolve(null)
+    }, 1000))
+
+    toast.success('Message sent successfully!', {
+      description: 'We’ll get back to you shortly.'
+    })
+
+    reset()
+  }
+
   return (
     <section className="py-16 lg:py-24 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
           <motion.div
             initial="initial"
             whileInView="animate"
@@ -29,8 +68,7 @@ export function ContactPreview() {
               Get in Touch
             </h2>
             <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
-              Have questions about our service? Need help with integration?
-              Want to provide feedback? We&apos;d love to hear from you.
+              Have questions about our service? Need help with integration? Want to provide feedback? We&apos;d love to hear from you.
             </p>
 
             <div className="space-y-4 mb-8">
@@ -40,7 +78,7 @@ export function ContactPreview() {
                 </div>
                 <div>
                   <div className="font-medium text-slate-900 dark:text-white">Email Support</div>
-                  <div className="text-slate-600 dark:text-slate-300">support@tempmail.pro</div>
+                  <div className="text-slate-600 dark:text-slate-300">info@svinfocraft.com</div>
                 </div>
               </div>
 
@@ -55,12 +93,16 @@ export function ContactPreview() {
               </div>
             </div>
 
-            <Link href="/contact" className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline mb-6">
+            <Link
+              href="/contact"
+              className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline mb-6"
+            >
               <MessageSquare className="w-5 h-5 mr-2" />
               View Full Contact Page
             </Link>
           </motion.div>
 
+          {/* Right Form Card */}
           <motion.div
             initial="initial"
             whileInView="animate"
@@ -73,19 +115,57 @@ export function ContactPreview() {
                   Quick Message
                 </h3>
 
-                <form className="space-y-4">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
-                    <Input placeholder="Your name" />
-                    <Input placeholder="Your email" type="email" />
+                    <div className="space-y-1">
+                      <Input
+                        placeholder="Your name"
+                        {...register('name')}
+                      />
+                      {errors.name && (
+                        <p className="text-sm text-red-500">{errors.name.message}</p>
+                      )}
+                    </div>
+                    <div className="space-y-1">
+                      <Input
+                        placeholder="Your email"
+                        type="email"
+                        {...register('email')}
+                      />
+                      {errors.email && (
+                        <p className="text-sm text-red-500">{errors.email.message}</p>
+                      )}
+                    </div>
                   </div>
-                  <Textarea
-                    placeholder="Your message..."
-                    rows={4}
-                    className="resize-none"
-                  />
-                  <Button className="w-full bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700">
-                    <Send className="w-4 h-4 mr-2" />
-                    Send Message
+
+                  <div className="space-y-1">
+                    <Textarea
+                      placeholder="Your message..."
+                      rows={4}
+                      className="resize-none"
+                      {...register('message')}
+                    />
+                    {errors.message && (
+                      <p className="text-sm text-red-500">{errors.message.message}</p>
+                    )}
+                  </div>
+
+                  <Button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <div className="flex items-center">
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                        Sending...
+                      </div>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4 mr-2" />
+                        Send Message
+                      </>
+                    )}
                   </Button>
                 </form>
 

@@ -18,7 +18,7 @@ const staggerContainer = {
     },
 };
 
-const HeroSection = () => {
+export const HeroSection = () => {
     return (
         <section className="relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-32">
             {/* Subtle animated floating icons */}
@@ -126,5 +126,3 @@ const HeroSection = () => {
         </section>
     );
 };
-
-export default HeroSection;

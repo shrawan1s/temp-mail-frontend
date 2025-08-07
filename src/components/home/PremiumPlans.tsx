@@ -139,7 +139,7 @@ export function PremiumPlans() {
           viewport={{ once: true }}
           variants={staggerContainer}
         >
-          {plans.map((plan, idx) => {
+          {plans.map((plan) => {
             const isPopular = plan.popular
             const price = priceMap[plan.name][billing]
             return (

@@ -14,16 +14,8 @@ const fadeInUp = {
   transition: { duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }
 }
 
-// A slow floating animation for blobs
-const float = {
-  animate: {
-    y: [0, -10, 0],
-    transition: { duration: 6, ease: 'easeInOut', repeat: Infinity }
-  }
-}
-
 export function AboutPreview() {
-  const techStack = ['NestJS', 'PostgreSQL', 'Redis', 'Weaviate', 'TypeScript', 'Docker']
+  const techStack = ['NextJS', 'TypeScript', 'TailwindCSS', 'ShadCN UI', 'PostgreSQL', 'Docker']
 
   return (
     <section className="relative py-16 lg:py-24 bg-white dark:bg-slate-900 overflow-hidden">

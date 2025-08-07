@@ -37,13 +37,6 @@ export default function PrivacyPolicyPage() {
                             of Service and our Privacy Policy. If you do not agree, please do not use the Service.
                         </p>
 
-                        {/* <ul className="space-y-2 text-slate-600 dark:text-slate-300 mb-8">
-                            <li><strong>Temporary Email Addresses:</strong> We generate and temporarily store email addresses for the duration you specify</li>
-                            <li><strong>Email Content:</strong> We temporarily store incoming emails only until expiration</li>
-                            <li><strong>Usage Analytics:</strong> Basic anonymized usage statistics to improve our service</li>
-                            <li><strong>Account Information:</strong> For Pro users, we store email and payment information securely</li>
-                        </ul> */}
-
                         <h2 className="flex items-center text-2xl font-bold text-slate-900 dark:text-white mb-4">
                             2. User Accounts
                         </h2>
@@ -103,8 +96,8 @@ export default function PrivacyPolicyPage() {
 
                         <p>
                             For questions about these Terms, please contact us at{' '}
-                            <a href="mailto:legal@tempmail.pro" className="text-blue-600 hover:underline">
-                                legal@tempmail.pro
+                            <a href="mailto:info@svinfocraft.com" className="text-blue-600 hover:underline">
+                                info@svinfocraft.com
                             </a>.
                         </p>
                     </div>
