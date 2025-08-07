@@ -1,7 +1,7 @@
-import { Separator } from '@/components/ui/separator'
-import { Shield } from 'lucide-react'
-import { Header } from '@/components/layout/Header'
-import { Footer } from '@/components/layout/Footer'
+import { Separator } from '@/components/ui/separator';
+import { Shield } from 'lucide-react';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 
 export default function PrivacyPolicyPage() {
   return (
@@ -130,12 +130,10 @@ export default function PrivacyPolicyPage() {
 
             <p className="text-slate-600 dark:text-slate-300 mb-4">
               If you have questions about this privacy policy or our privacy practices, please contact us:
+              {" "}<a href="mailto:info@svinfocraft.com" className="text-blue-600 hover:underline">
+                info@svinfocraft.com
+              </a>.
             </p>
-
-            <ul className="space-y-2 text-slate-600 dark:text-slate-300">
-              <li>Email: privacy@tempmail.pro</li>
-              <li>Address: Privacy Officer, TempMail Pro, San Francisco, CA</li>
-            </ul>
           </div>
         </div>
       </main>
