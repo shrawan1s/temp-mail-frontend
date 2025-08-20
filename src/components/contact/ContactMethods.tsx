@@ -98,9 +98,9 @@ export const ContactMethods = () => {
                     {contactMethods.map((method, idx) => {
                         const Icon = method.icon;
                         return (
-                            <motion.div key={idx} variants={fadeInUp}>
+                            <motion.div key={idx} variants={fadeInUp} whileHover={{ scale: 1.02 }}>
                                 {/* Inside the map loop */}
-                                <Card className="h-full flex flex-col border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+                                <Card className="h-full flex flex-col border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-shadow duration-300">
                                     <CardContent className="flex-1 p-8 flex flex-col justify-between relative">
                                         {method.isPro && (
                                             <div className="absolute top-3 right-3 z-10">

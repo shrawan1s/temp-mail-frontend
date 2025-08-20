@@ -87,7 +87,7 @@ export function Header() {
           {/* Desktop Actions */}
           <div className="hidden lg:flex items-center space-x-3">
             {!isLoggedIn ? (
-              <Link href="/auth">
+              <Link href="/login">
                 <Button className="bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white shadow-lg hover:shadow-xl transition-all duration-300">
                   Get Started Free
                 </Button>
