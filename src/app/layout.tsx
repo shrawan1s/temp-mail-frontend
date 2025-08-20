@@ -19,7 +19,10 @@ export const metadata: Metadata = {
   title: 'TempMail Pro - Secure Temporary Email Service',
   description: 'Generate secure, private temporary email addresses instantly. Perfect for developers, testing, and protecting your privacy online.',
   keywords: 'temporary email, disposable email, privacy, secure email, developers',
-  generator: 'v0.dev'
+  generator: 'Shrawan Thakur',
+  icons: {
+    icon: '/favicon.png',
+  }
 }
 
 export default function RootLayout({

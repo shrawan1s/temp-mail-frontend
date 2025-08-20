@@ -69,7 +69,7 @@ export const ContactForm = () => {
                         transition={{ duration: 0.6 }}
                         viewport={{ once: true }}
                     >
-                        Get in Touch
+                        Send Us a Message
                     </motion.h2>
                     <motion.p
                         className="mt-4 text-slate-600 dark:text-slate-400 max-w-xl mx-auto"

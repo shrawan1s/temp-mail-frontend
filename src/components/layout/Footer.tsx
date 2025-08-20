@@ -1,4 +1,4 @@
-import { Mail, Github, Twitter, Heart } from 'lucide-react'
+import { Mail, Linkedin, Twitter, Heart } from 'lucide-react'
 import Link from 'next/link'
 
 export function Footer() {
@@ -6,14 +6,14 @@ export function Footer() {
     Product: [
       { name: 'Features', href: '/#features' },
       { name: 'Pricing', href: '/premium' },
-      { name: 'API', href: '/api' },
-      { name: 'Status', href: '/status' },
+      { name: 'API', href: '/coming-soon' },
+      { name: 'Status', href: '/coming-soon' },
     ],
     Company: [
       { name: 'About', href: '/about' },
       { name: 'Contact', href: '/contact' },
       { name: 'Pricing', href: '/premium' },
-      { name: 'API Docs', href: '/api' },
+      { name: 'API Docs', href: '/coming-soon' },
     ],
     Legal: [
       { name: 'Privacy Policy', href: '/privacy-policy' },
@@ -39,11 +39,11 @@ export function Footer() {
               reliable disposable email service.
             </p>
             <div className="flex space-x-4">
-              <a href="#" aria-label="Twitter" className="text-slate-400 hover:text-white transition-colors">
+              <a href="https://x.com/sv_infocraft" target='_blank' aria-label="Twitter" className="text-slate-400 hover:text-white transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" aria-label="GitHub" className="text-slate-400 hover:text-white transition-colors">
-                <Github className="w-5 h-5" />
+              <a href="https://www.linkedin.com/company/sv-infocraft/" target='_blank' aria-label="Linkedin" className="text-slate-400 hover:text-white transition-colors">
+                <Linkedin className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -70,7 +70,7 @@ export function Footer() {
 
         <div className="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-slate-400 text-sm">
-            © {new Date().getFullYear()} SV Infocraft. All rights reserved.
+            © {new Date().getFullYear()} <a target='_blank' href="https://svinfocraft.com/">SV Infocraft</a>. All rights reserved.
           </p>
           <p className="text-slate-400 text-sm flex items-center mt-4 md:mt-0">
             Made with <Heart className="w-4 h-4 mx-1 text-red-500" /> for privacy
