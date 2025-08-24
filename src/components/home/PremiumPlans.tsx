@@ -114,7 +114,10 @@ const PremiumPlans = () => {
         <div className="flex items-center justify-center mb-8">
           <div role="tablist" aria-label="Billing period" className="inline-flex rounded-full bg-slate-100 dark:bg-slate-800 p-1">
             <button
-              aria-pressed={billing === 'monthly'}
+              role="tab"
+              id="monthly-tab"
+              aria-selected={billing === 'monthly'}
+              aria-controls="monthly-panel"
               onClick={() => setBilling('monthly')}
               className={`px-4 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 transition ${billing === 'monthly'
                 ? 'bg-white dark:bg-slate-900 shadow-sm text-slate-900 dark:text-white'
@@ -125,7 +128,10 @@ const PremiumPlans = () => {
             </button>
 
             <button
-              aria-pressed={billing === 'annual'}
+              role="tab"
+              id="annual-tab"
+              aria-controls="annual-panel"
+              aria-selected={billing === 'annual'}
               onClick={() => setBilling('annual')}
               className={`px-4 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 transition ${billing === 'annual'
                 ? 'bg-white dark:bg-slate-900 shadow-sm text-slate-900 dark:text-white'
