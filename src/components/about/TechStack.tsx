@@ -61,7 +61,7 @@ const techStack = [
     }
 ];
 
-export const TechStack = () => (
+const TechStack = () => (
     <section className="py-16 lg:py-24 bg-white dark:bg-slate-900">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-12">
@@ -131,3 +131,5 @@ export const TechStack = () => (
         </div>
     </section>
 );
+
+export default TechStack;

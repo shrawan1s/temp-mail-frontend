@@ -1,16 +1,16 @@
-'use client'
+'use client';
 
-import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { cubicBezier, motion } from 'framer-motion'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Label } from '@/components/ui/label'
-import { Send } from 'lucide-react'
-import { toast } from 'sonner'
+import { z } from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { cubicBezier, motion } from 'framer-motion';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Send } from 'lucide-react';
+import { toast } from 'sonner';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 24 },
@@ -33,7 +33,7 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>
 
-export const ContactForm = () => {
+const ContactForm = () => {
     const {
         register,
         handleSubmit,
@@ -174,3 +174,5 @@ export const ContactForm = () => {
         </section>
     )
 }
+
+export default ContactForm;

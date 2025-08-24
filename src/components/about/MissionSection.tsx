@@ -18,7 +18,7 @@ const fadeInUp = {
     },
 }
 
-export const MissionSection = () => {
+const MissionSection = () => {
     return (
         <section className="py-16 lg:py-24 bg-white dark:bg-slate-900">
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
@@ -74,3 +74,5 @@ export const MissionSection = () => {
         </section>
     );
 };
+
+export default MissionSection;

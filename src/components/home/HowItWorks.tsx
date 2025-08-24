@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { Card, CardContent } from '@/components/ui/card'
-import { ArrowRight, Mail, MousePointer, Clock } from 'lucide-react'
+import { motion } from 'framer-motion';
+import { Card, CardContent } from '@/components/ui/card';
+import { ArrowRight, Mail, MousePointer, Clock } from 'lucide-react';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 24 },
@@ -18,31 +18,31 @@ const staggerContainer = {
   }
 }
 
-export function HowItWorks() {
-  const steps = [
-    {
-      step: 1,
-      icon: Mail,
-      title: 'Generate',
-      description: 'Get an instant temporary email address with one click',
-      color: 'from-blue-500 to-cyan-500'
-    },
-    {
-      step: 2,
-      icon: MousePointer,
-      title: 'Use',
-      description: 'Copy and use it anywhere you need a disposable email',
-      color: 'from-violet-500 to-purple-500'
-    },
-    {
-      step: 3,
-      icon: Clock,
-      title: 'Expire',
-      description: 'It automatically expires and cleans up after set time',
-      color: 'from-amber-500 to-orange-500'
-    }
-  ]
+const steps = [
+  {
+    step: 1,
+    icon: Mail,
+    title: 'Generate',
+    description: 'Get an instant temporary email address with one click',
+    color: 'from-blue-500 to-cyan-500'
+  },
+  {
+    step: 2,
+    icon: MousePointer,
+    title: 'Use',
+    description: 'Copy and use it anywhere you need a disposable email',
+    color: 'from-violet-500 to-purple-500'
+  },
+  {
+    step: 3,
+    icon: Clock,
+    title: 'Expire',
+    description: 'It automatically expires and cleans up after set time',
+    color: 'from-amber-500 to-orange-500'
+  }
+]
 
+const HowItWorks = () => {
   return (
     <section className="py-16 lg:py-24 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -109,3 +109,5 @@ export function HowItWorks() {
     </section>
   )
 }
+
+export default HowItWorks;

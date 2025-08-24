@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { Card, CardContent } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Shield, Code, Users, ArrowRight } from 'lucide-react'
-import Link from 'next/link'
+import { motion } from 'framer-motion';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Shield, Code, Users, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 // Framer variants
 const fadeInUp = {
@@ -14,9 +14,9 @@ const fadeInUp = {
   transition: { duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }
 }
 
-export function AboutPreview() {
-  const techStack = ['NextJS', 'TypeScript', 'TailwindCSS', 'ShadCN UI', 'PostgreSQL', 'Docker']
+const techStack = ['NextJS', 'TypeScript', 'TailwindCSS', 'ShadCN UI', 'PostgreSQL', 'Docker']
 
+const AboutPreview = () => {
   return (
     <section className="relative py-16 lg:py-24 bg-white dark:bg-slate-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -163,3 +163,5 @@ export function AboutPreview() {
     </section>
   )
 }
+
+export default AboutPreview;

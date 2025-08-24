@@ -1,44 +1,79 @@
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import { HeroSection } from '@/components/home/HeroSection';
-import { HowItWorks } from '@/components/home/HowItWorks';
-import { FeaturesGrid } from '@/components/home/FeaturesGrid';
-import { UseCases } from '@/components/home/UseCases';
-import { PremiumPlans } from '@/components/home/PremiumPlans';
-import { AboutPreview } from '@/components/home/AboutPreview';
-import { ContactPreview } from '@/components/home/ContactPreview';
-import { FAQ } from '@/components/home/FAQ';
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
+import PublicLayout from "@/app/(public)/layout";
+import {
+  HeroSkeleton,
+  HowItWorksSkeleton,
+  FeaturesGridSkeleton,
+  UseCasesSkeleton,
+  PremiumPlansSkeleton,
+  FAQSkeleton,
+  ContactPreviewSkeleton,
+  AboutPreviewSkeleton,
+} from "@/components/skeleton/home";
+
+const {
+  HowItWorks,
+  FeaturesGrid,
+  UseCases,
+  PremiumPlans,
+  AboutPreview,
+  ContactPreview,
+  FAQ,
+} = {
+  HowItWorks: dynamic(() => import("@/components/home/HowItWorks")),
+  FeaturesGrid: dynamic(() => import("@/components/home/FeaturesGrid")),
+  UseCases: dynamic(() => import("@/components/home/UseCases")),
+  PremiumPlans: dynamic(() => import("@/components/home/PremiumPlans")),
+  AboutPreview: dynamic(() => import("@/components/home/AboutPreview")),
+  ContactPreview: dynamic(() => import("@/components/home/ContactPreview")),
+  FAQ: dynamic(() => import("@/components/home/FAQ")),
+};
+
+import HeroSection from "@/components/home/HeroSection";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 dark:from-slate-950 dark:via-slate-900 dark:to-blue-950/30">
-      <Header />
-
+    <PublicLayout>
       {/* Hero Section */}
-      <HeroSection />
+      <Suspense fallback={<HeroSkeleton />}>
+        <HeroSection />
+      </Suspense>
 
       {/* How It Works */}
-      <HowItWorks />
+      <Suspense fallback={<HowItWorksSkeleton />}>
+        <HowItWorks />
+      </Suspense>
 
       {/* Features Grid */}
-      <FeaturesGrid />
+      <Suspense fallback={<FeaturesGridSkeleton />}>
+        <FeaturesGrid />
+      </Suspense>
 
       {/* Use Cases */}
-      <UseCases />
+      <Suspense fallback={<UseCasesSkeleton />}>
+        <UseCases />
+      </Suspense>
 
       {/* Premium Plans */}
-      <PremiumPlans />
+      <Suspense fallback={<PremiumPlansSkeleton />}>
+        <PremiumPlans />
+      </Suspense>
 
       {/* About Preview */}
-      <AboutPreview />
+      <Suspense fallback={<AboutPreviewSkeleton />}>
+        <AboutPreview />
+      </Suspense>
 
       {/* Contact Preview */}
-      <ContactPreview />
+      <Suspense fallback={<ContactPreviewSkeleton />}>
+        <ContactPreview />
+      </Suspense>
 
       {/* FAQ */}
-      <FAQ />
-
-      <Footer />
-    </div>
+      <Suspense fallback={<FAQSkeleton />}>
+        <FAQ />
+      </Suspense>
+    </PublicLayout>
   )
 }

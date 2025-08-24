@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { Card, CardContent } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Code, UserCheck, TestTube, ArrowRight } from 'lucide-react'
-import Link from 'next/link'
+import { motion } from 'framer-motion';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Code, UserCheck, TestTube, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 24 },
@@ -21,37 +21,37 @@ const staggerContainer = {
   }
 }
 
-export function UseCases() {
-  const useCases = [
-    {
-      icon: Code,
-      title: 'Developers',
-      description:
-        'Test email flows, API integrations, and user registration without cluttering your inbox',
-      badge: 'API Ready',
-      color: 'from-blue-500 to-cyan-500',
-      features: ['API Integration', 'Webhook Support', 'Bulk Generation', 'Custom Domains']
-    },
-    {
-      icon: UserCheck,
-      title: 'Secure Sign-ups',
-      description:
-        'Protect your real email when signing up for services, newsletters, or one-time verifications',
-      badge: 'Privacy First',
-      color: 'from-green-500 to-emerald-500',
-      features: ['No Tracking', 'Auto Expiry', 'Spam Protection', 'Anonymous']
-    },
-    {
-      icon: TestTube,
-      title: 'QA & Testers',
-      description:
-        'Create multiple test accounts, verify email workflows, and test user journeys efficiently',
-      badge: 'Team Ready',
-      color: 'from-purple-500 to-violet-500',
-      features: ['Multiple Emails', 'Team Sharing', 'Test Automation', 'Bulk Actions']
-    }
-  ]
+const useCases = [
+  {
+    icon: Code,
+    title: 'Developers',
+    description:
+      'Test email flows, API integrations, and user registration without cluttering your inbox',
+    badge: 'API Ready',
+    color: 'from-blue-500 to-cyan-500',
+    features: ['API Integration', 'Webhook Support', 'Bulk Generation', 'Custom Domains']
+  },
+  {
+    icon: UserCheck,
+    title: 'Secure Sign-ups',
+    description:
+      'Protect your real email when signing up for services, newsletters, or one-time verifications',
+    badge: 'Privacy First',
+    color: 'from-green-500 to-emerald-500',
+    features: ['No Tracking', 'Auto Expiry', 'Spam Protection', 'Anonymous']
+  },
+  {
+    icon: TestTube,
+    title: 'QA & Testers',
+    description:
+      'Create multiple test accounts, verify email workflows, and test user journeys efficiently',
+    badge: 'Team Ready',
+    color: 'from-purple-500 to-violet-500',
+    features: ['Multiple Emails', 'Team Sharing', 'Test Automation', 'Bulk Actions']
+  }
+]
 
+const UseCases = () => {
   return (
     <section className="py-16 lg:py-24 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -82,7 +82,7 @@ export function UseCases() {
           {useCases.map((useCase, index) => (
             <motion.div key={index} variants={fadeInUp}>
               <Card className="h-full border-0 bg-white dark:bg-slate-800 shadow-xl hover:shadow-2xl transition-all duration-300 group">
-                <CardContent className="p-8 flex flex-col justify-between h-full">
+                <CardContent className="p-8 flex flex-col justify-between space-y-2 h-full">
                   {/* Top: Icon + Badge + Text */}
                   <div>
                     <div className="flex items-center justify-between mb-4">
@@ -133,3 +133,5 @@ export function UseCases() {
     </section>
   )
 }
+
+export default UseCases;

@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
-import React from 'react'
-import { cubicBezier, motion } from 'framer-motion'
-import { Lock, ShieldCheck, Zap, Globe } from 'lucide-react'
-import { Separator } from '@/components/ui/separator'
+import React from 'react';
+import { cubicBezier, motion } from 'framer-motion';
+import { Lock, ShieldCheck, Zap, Globe } from 'lucide-react';
+import { Separator } from '@/components/ui/separator';
 
 const fadeInUp = {
     initial: { opacity: 0, y: 24 },
@@ -48,7 +48,7 @@ const features = [
     },
 ]
 
-export const SecurityAndPrivacy = () => {
+const SecurityAndPrivacy = () => {
     return (
         <section className="py-16 lg:py-24 bg-white dark:bg-slate-900">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -108,3 +108,5 @@ export const SecurityAndPrivacy = () => {
         </section>
     )
 };
+
+export default SecurityAndPrivacy;
