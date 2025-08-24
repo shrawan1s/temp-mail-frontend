@@ -1,12 +1,12 @@
-'use client'
+'use client';
 
-import React, { useState } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
-import Link from 'next/link'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Check, Crown, Zap, Star } from 'lucide-react'
+import React, { useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
+import Link from 'next/link';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Check, Crown, Zap, Star } from 'lucide-react';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 24 },
@@ -14,7 +14,7 @@ const fadeInUp = {
   transition: { duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }
 }
 
-type Billing = 'monthly' | 'annual'
+type Billing = 'monthly' | 'annual';
 
 const plansData = [
   {
@@ -74,7 +74,8 @@ const plansData = [
     prices: { monthly: 29, annual: 290 }
   }
 ]
-export function PremiumPlans() {
+
+const PremiumPlans = () => {
   const [billing, setBilling] = useState<Billing>('monthly')
   const reduce = useReducedMotion()
 
@@ -236,3 +237,5 @@ export function PremiumPlans() {
     </section>
   )
 }
+
+export default PremiumPlans;

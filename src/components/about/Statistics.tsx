@@ -47,7 +47,7 @@ const stats = [
     }
 ];
 
-export const Statistics = () => {
+const Statistics = () => {
     return (
         <section className="py-16 lg:py-24 bg-gradient-to-br from-blue-50 to-violet-50/50 dark:from-blue-950/30 dark:to-violet-950/30">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -85,3 +85,5 @@ export const Statistics = () => {
         </section>
     );
 };
+
+export default Statistics;

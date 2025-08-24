@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { Card, CardContent } from '@/components/ui/card'
+import { motion } from 'framer-motion';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   RefreshCw,
   Globe,
@@ -15,7 +15,7 @@ import {
   BrainCircuit,
   Tag,
   FileText
-} from 'lucide-react'
+} from 'lucide-react';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 24 },
@@ -31,78 +31,78 @@ const staggerContainer = {
   }
 }
 
-export function FeaturesGrid() {
-  const features = [
-    {
-      icon: RefreshCw,
-      title: 'Auto Refresh',
-      description: 'Real-time email updates without manual refresh',
-      color: 'from-blue-500 to-cyan-500'
-    },
-    {
-      icon: ShieldAlert,
-      title: 'AI Spam Filter',
-      description: 'Advanced AI filters out malicious and spam emails',
-      color: 'from-red-500 to-pink-500'
-    },
-    {
-      icon: BrainCircuit,
-      title: 'Intent Detection',
-      description: 'AI detects email intent: login, OTP, newsletter, etc.',
-      color: 'from-purple-500 to-fuchsia-500',
-      premium: true
-    },
-    {
-      icon: Tag,
-      title: 'Smart Labels',
-      description: 'Auto-labels emails to keep your inbox organized',
-      color: 'from-indigo-500 to-violet-500',
-      premium: true,
-      upcoming: true
-    },
-    {
-      icon: FileText,
-      title: 'AI Summarizer',
-      description: 'Summarize long emails in seconds with AI',
-      color: 'from-amber-500 to-orange-500',
-      premium: true,
-      upcoming: true
-    },
-    {
-      icon: Globe,
-      title: 'Custom Domain',
-      description: 'Use your own domain for a professional appearance',
-      color: 'from-green-500 to-emerald-500',
-      premium: true
-    },
-    {
-      icon: Paperclip,
-      title: 'Attachment Support',
-      description: 'Receive and view email attachments securely',
-      color: 'from-yellow-500 to-orange-500'
-    },
-    {
-      icon: Lock,
-      title: 'Secure Headers',
-      description: 'Encrypted email headers for added security',
-      color: 'from-slate-500 to-gray-500',
-      premium: true
-    },
-    {
-      icon: Code,
-      title: 'API Access',
-      description: 'Integrate inbox features with your own apps',
-      color: 'from-pink-500 to-rose-500',
-      premium: true
-    },
-    {
-      icon: Zap,
-      title: 'Lightning Fast',
-      description: 'Emails delivered in under 5 seconds worldwide',
-      color: 'from-yellow-400 to-yellow-600'
-    }
-  ]
+const features = [
+  {
+    icon: RefreshCw,
+    title: 'Auto Refresh',
+    description: 'Real-time email updates without manual refresh',
+    color: 'from-blue-500 to-cyan-500'
+  },
+  {
+    icon: ShieldAlert,
+    title: 'AI Spam Filter',
+    description: 'Advanced AI filters out malicious and spam emails',
+    color: 'from-red-500 to-pink-500'
+  },
+  {
+    icon: BrainCircuit,
+    title: 'Intent Detection',
+    description: 'AI detects email intent: login, OTP, newsletter, etc.',
+    color: 'from-purple-500 to-fuchsia-500',
+    premium: true
+  },
+  {
+    icon: Tag,
+    title: 'Smart Labels',
+    description: 'Auto-labels emails to keep your inbox organized',
+    color: 'from-indigo-500 to-violet-500',
+    premium: true,
+    upcoming: true
+  },
+  {
+    icon: FileText,
+    title: 'AI Summarizer',
+    description: 'Summarize long emails in seconds with AI',
+    color: 'from-amber-500 to-orange-500',
+    premium: true,
+    upcoming: true
+  },
+  {
+    icon: Globe,
+    title: 'Custom Domain',
+    description: 'Use your own domain for a professional appearance',
+    color: 'from-green-500 to-emerald-500',
+    premium: true
+  },
+  {
+    icon: Paperclip,
+    title: 'Attachment Support',
+    description: 'Receive and view email attachments securely',
+    color: 'from-yellow-500 to-orange-500'
+  },
+  {
+    icon: Lock,
+    title: 'Secure Headers',
+    description: 'Encrypted email headers for added security',
+    color: 'from-slate-500 to-gray-500',
+    premium: true
+  },
+  {
+    icon: Code,
+    title: 'API Access',
+    description: 'Integrate inbox features with your own apps',
+    color: 'from-pink-500 to-rose-500',
+    premium: true
+  },
+  {
+    icon: Zap,
+    title: 'Lightning Fast',
+    description: 'Emails delivered in under 5 seconds worldwide',
+    color: 'from-yellow-400 to-yellow-600'
+  }
+]
 
+const FeaturesGrid = () => {
   return (
     <section className="py-16 lg:py-24 bg-white dark:bg-slate-900" id="features">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -172,3 +172,5 @@ export function FeaturesGrid() {
     </section>
   )
 }
+
+export default FeaturesGrid;

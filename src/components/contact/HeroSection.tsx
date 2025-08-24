@@ -24,7 +24,7 @@ const staggerContainer = {
     },
 };
 
-export const HeroSection = () => {
+const HeroSection = () => {
     return (
         <section className="relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-32">
             {/* Floating icons for atmosphere */}
@@ -98,3 +98,5 @@ export const HeroSection = () => {
         </section>
     );
 };
+
+export default HeroSection;

@@ -18,9 +18,9 @@ const staggerContainer = {
     },
 };
 
-export const HeroSection = () => {
+const HeroSection = () => {
     return (
-        <section className="relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-32">
+        <section className="pt-32 pb-20 lg:pt-40 lg:pb-32">
             {/* Subtle animated floating icons */}
             {[...Array(5)].map((_, i) => (
                 <motion.div
@@ -126,3 +126,5 @@ export const HeroSection = () => {
         </section>
     );
 };
+
+export default HeroSection;

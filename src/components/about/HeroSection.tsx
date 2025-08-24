@@ -17,7 +17,7 @@ const stagger = {
     animate: { transition: { staggerChildren: 0.1 } }
 };
 
-export const HeroSection = () => (
+const HeroSection = () => (
     <section className="relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-32">
         {/* Radial gradient backplate */}
         <div className="absolute inset-0">
@@ -82,3 +82,5 @@ export const HeroSection = () => (
         </div>
     </section>
 );
+
+export default HeroSection;
