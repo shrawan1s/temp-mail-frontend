@@ -86,7 +86,7 @@ export default function HeroSection() {
 
                     {/* CTAs */}
                     <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
-                        <Link href="/premium/checkout">
+                        <Link href="#">
                             <Button
                                 size="lg"
                                 className="px-7 py-4 text-lg font-semibold bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 shadow-lg transition-transform focus:outline-none focus:ring-4 focus:ring-yellow-300/30"

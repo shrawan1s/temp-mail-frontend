@@ -24,7 +24,7 @@ const plansData = [
             'With advertisements'
         ],
         cta: 'Current Plan',
-        href: '/inbox',
+        href: '#',
         variant: 'outline' as const,
         popular: false,
         prices: { monthly: 0, annual: 0 }
@@ -44,7 +44,7 @@ const plansData = [
             'API access'
         ],
         cta: 'Upgrade to Pro',
-        href: '/premium/checkout',
+        href: '#',
         variant: 'default' as const,
         popular: true,
         prices: { monthly: 9, annual: 90 } // 90 = 2 months free
@@ -62,7 +62,7 @@ const plansData = [
             'SLA & uptime guarantees'
         ],
         cta: 'Contact Sales',
-        href: '/contact',
+        href: '#',
         variant: 'outline' as const,
         popular: false,
         prices: { monthly: 29, annual: 290 }
