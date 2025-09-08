@@ -22,7 +22,6 @@ const HeroSection = () => (
         {/* Radial gradient backplate */}
         <div className="absolute inset-0">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-violet-600/5 to-cyan-600/5" />
-            <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl animate-pulse" />
             <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-violet-400/10 rounded-full blur-3xl animate-pulse delay-1000" />
         </div>
 
@@ -71,7 +70,7 @@ const HeroSection = () => (
 
                 {/* CTAs */}
                 <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-                    <Link href="/inbox">
+                    <Link href="/login">
                         <Button size="lg" className="bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-lg hover:from-blue-700 hover:to-violet-700">
                             Try It Now
                             <ArrowRight className="ml-2 w-5 h-5" />

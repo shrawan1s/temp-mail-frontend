@@ -117,7 +117,7 @@ const UseCases = () => {
                         </div>
                       ))}
                     </div>
-                    <Link href="/inbox">
+                    <Link href="/login">
                       <Button className="w-full bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white transition-all duration-300">
                         Get Started
                         <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />

@@ -47,7 +47,7 @@ const contactMethods = [
         icon: MessageSquare,
         title: 'Live Chat',
         description: 'Instant support for Pro and Business users',
-        link: '/chat',
+        link: '#',
         label: 'Start Chat',
         color: 'from-purple-500 to-violet-500',
         isPro: true,
