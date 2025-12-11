@@ -1,3 +1,3 @@
-export { default as HeroSection } from './HeroSection';
-export { default as ContactMethods } from './ContactMethods';
-export { default as ContactForm } from './ContactForm';
+export * from './HeroSection';
+export * from './ContactMethods';
+export * from './ContactForm';

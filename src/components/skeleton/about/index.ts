@@ -1,6 +1,6 @@
-export { default as HeroSkeleton } from "./HeroSkeleton";
-export { default as StatisticsSkeleton } from "./StatisticsSkeleton";
-export { default as MissionSectionSkeleton } from "./MissionSectionSkeleton";
-export { default as ValuesGridSkeleton } from "./ValuesGridSkeleton";
-export { default as TechStackSkeleton } from "./TechStackSkeleton";
-export { default as SecurityAndPrivacySkeleton } from "./SecurityAndPrivacySkeleton";
+export * from "./HeroSkeleton";
+export * from "./StatisticsSkeleton";
+export * from "./MissionSectionSkeleton";
+export * from "./ValuesGridSkeleton";
+export * from "./TechStackSkeleton";
+export * from "./SecurityAndPrivacySkeleton";
