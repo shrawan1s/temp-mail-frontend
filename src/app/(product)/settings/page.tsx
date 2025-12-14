@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Settings, Sun, Shield, Bell, Trash2, Crown, Mail } from 'lucide-react';
-import { Header } from '@/components/layout/Header';
+import { Header } from '@/components/layout';
 import { useToast } from '@/hooks/use-toast';
 
 export default function SettingsPage() {

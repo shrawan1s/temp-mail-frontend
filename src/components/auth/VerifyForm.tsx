@@ -4,7 +4,6 @@ import AuthCard from '@/components/shared/AuthCard';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -103,7 +102,7 @@ export default function VerifyForm() {
                 <div className="text-center">
                     <h1 className="text-2xl font-bold">Verify your account</h1>
                     <p className="text-sm text-muted-foreground">
-                        We've sent a 6-digit verification code to {email || 'your email'}. Enter it below to continue.
+                        We&apos;ve sent a 6-digit verification code to {email || 'your email'}. Enter it below to continue.
                     </p>
                 </div>
 
@@ -126,7 +125,7 @@ export default function VerifyForm() {
                 </form>
 
                 <p className="text-sm text-center text-muted-foreground">
-                    Didn't get the code?{" "}
+                    Didn&apos;t get the code?{" "}
                     <button 
                         onClick={handleResend} 
                         disabled={resending}

@@ -1,5 +1,5 @@
 import { LoginForm } from "@/components/auth";
-import LoginFormSkeleton from "@/components/skeleton/auth/LoginFormSkeleton";
+import { LoginFormSkeleton } from "@/components/skeleton";
 import { Suspense } from "react";
 
 export default function LoginPage() {

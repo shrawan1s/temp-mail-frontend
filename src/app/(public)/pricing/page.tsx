@@ -2,11 +2,11 @@ import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 import {
-  HeroSkeleton,
+  PricingHeroSkeleton,
   PricingCardsSkeleton,
-  FeatureComparisonSkeleton,
-  FAQSkeleton
-} from '@/components/skeleton/pricing';
+  PricingFeatureComparisonSkeleton,
+  PricingFAQSkeleton
+} from '@/components/skeleton';
 
 const {
   PricingCards,
@@ -24,7 +24,7 @@ export default function PremiumPage() {
   return (
     <>
       {/* Hero Section */}
-      <Suspense fallback={<HeroSkeleton />}>
+      <Suspense fallback={<PricingHeroSkeleton />}>
         <HeroSection />
       </Suspense>
 
@@ -34,12 +34,12 @@ export default function PremiumPage() {
       </Suspense>
 
       {/* Feature Comparison */}
-      <Suspense fallback={<FeatureComparisonSkeleton />}>
+      <Suspense fallback={<PricingFeatureComparisonSkeleton />}>
         <FeatureComparison />
       </Suspense>
 
       {/* FAQ Section */}
-      <Suspense fallback={<FAQSkeleton />}>
+      <Suspense fallback={<PricingFAQSkeleton />}>
         <FAQ />
       </Suspense >
     </>

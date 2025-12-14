@@ -2,13 +2,13 @@ import { Suspense } from "react";
 import dynamic from "next/dynamic";
 
 import {
-  HeroSkeleton,
+  AboutHeroSkeleton,
   StatisticsSkeleton,
   MissionSectionSkeleton,
   ValuesGridSkeleton,
   TechStackSkeleton,
   SecurityAndPrivacySkeleton,
-} from "@/components/skeleton/about";
+} from "@/components/skeleton";
 
 const {
   Statistics,
@@ -30,7 +30,7 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero Section */}
-      <Suspense fallback={<HeroSkeleton />}>
+      <Suspense fallback={<AboutHeroSkeleton />}>
         <HeroSection />
       </Suspense>
 

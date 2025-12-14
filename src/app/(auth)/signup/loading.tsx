@@ -1,4 +1,4 @@
-import SignupFormSkeleton from "@/components/skeleton/auth/SignupFormSkeleton";
+import { SignupFormSkeleton } from "@/components/skeleton";
 
 export default function Loading() {
     return (

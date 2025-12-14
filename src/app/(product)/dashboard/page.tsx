@@ -1,15 +1,15 @@
 'use client'
 
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
-import { Separator } from '@/components/ui/separator'
-import { RefreshCw, Copy, Trash2, Clock, Mail, Shield, AlertTriangle, Tag, Settings } from 'lucide-react'
-import { Header } from '@/components/layout/Header'
-import { useToast } from '@/hooks/use-toast'
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
+import { RefreshCw, Copy, Trash2, Clock, Mail, Shield, AlertTriangle, Tag, Settings } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+import { Header } from '@/components/layout';
 
 interface Email {
   id: string

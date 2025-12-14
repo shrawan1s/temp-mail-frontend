@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { authApi, tokenStorage } from '@/lib/auth';
-import { IAuthContextType } from '@/interfaces/auth-context.interface';
+import { IAuthContextType } from '@/interfaces';
 import { IUser } from '@/interfaces';
 
 const AuthContext = createContext<IAuthContextType | undefined>(undefined);

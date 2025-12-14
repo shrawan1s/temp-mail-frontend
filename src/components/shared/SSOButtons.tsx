@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { FcGoogle } from "react-icons/fc"
 import { FaGithub } from "react-icons/fa"
 
-export function SSOButtons() {
+export default function SSOButtons() {
     const handleSSOLogin = (provider: "google" | "github") => {
         // Replace with your real API call (NextAuth, custom endpoint, etc.)
         console.log(`Signing in with ${provider}`)

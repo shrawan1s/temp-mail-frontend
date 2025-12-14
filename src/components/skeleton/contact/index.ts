@@ -1,3 +1,3 @@
-export * from './HeroSkeleton';
-export * from './ContactMethodsSkeleton';
-export * from './ContactFormSkeleton';
+export { default as ContactHeroSkeleton } from './HeroSkeleton';
+export { default as ContactMethodsSkeleton } from './ContactMethodsSkeleton';
+export { default as ContactFormSkeleton } from './ContactFormSkeleton';

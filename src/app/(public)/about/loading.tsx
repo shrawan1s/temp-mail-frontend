@@ -1,17 +1,17 @@
 import {
-    HeroSkeleton,
+    AboutHeroSkeleton,
     StatisticsSkeleton,
     MissionSectionSkeleton,
     ValuesGridSkeleton,
     TechStackSkeleton,
     SecurityAndPrivacySkeleton,
-} from "@/components/skeleton/about";
+} from "@/components/skeleton";
 
 export default function Loading() {
     return (
         <>
             {/* Hero Section */}
-            <HeroSkeleton />
+            <AboutHeroSkeleton />
             {/* Statistics */}
             <StatisticsSkeleton />
 

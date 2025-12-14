@@ -1,12 +1,12 @@
-import { HeroSkeleton, PricingCardsSkeleton, FeatureComparisonSkeleton, FAQSkeleton } from '@/components/skeleton/pricing';
+import { PricingHeroSkeleton, PricingCardsSkeleton, PricingFeatureComparisonSkeleton, PricingFAQSkeleton } from '@/components/skeleton';
 
 export default function Loading() {
     return (
         <>
-            <HeroSkeleton />
+            <PricingHeroSkeleton />
             <PricingCardsSkeleton />
-            <FeatureComparisonSkeleton />
-            <FAQSkeleton />
+            <PricingFeatureComparisonSkeleton />
+            <PricingFAQSkeleton />
         </>
     );
 }

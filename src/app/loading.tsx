@@ -7,7 +7,7 @@ import {
     FAQSkeleton,
     ContactPreviewSkeleton,
     AboutPreviewSkeleton,
-} from "@/components/skeleton/home";
+} from "@/components/skeleton";
 
 export default function Loading() {
     return (

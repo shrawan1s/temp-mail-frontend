@@ -10,7 +10,7 @@ import {
   FAQSkeleton,
   ContactPreviewSkeleton,
   AboutPreviewSkeleton,
-} from "@/components/skeleton/home";
+} from "@/components/skeleton";
 
 const {
   HowItWorks,

@@ -1,10 +1,8 @@
 "use client";
 
+import { Footer, Header } from '@/components/layout';
+import { FooterSkeleton, HeaderSkeleton } from '@/components/skeleton';
 import { ReactNode, Suspense, useEffect } from 'react';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import HeaderSkeleton from '@/components/skeleton/shared/HeaderSkeleton';
-import FooterSkeleton from '@/components/skeleton/shared/FooterSkeleton';
 
 export default function PublicLayout({ children }: { children: ReactNode }) {
     useEffect(() => {

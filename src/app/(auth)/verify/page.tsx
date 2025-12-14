@@ -1,5 +1,5 @@
 import { VerifyForm } from "@/components/auth";
-import VerifyFormSkeleton from "@/components/skeleton/auth/VerifyFormSkeleton";
+import { VerifyFormSkeleton } from "@/components/skeleton";
 import { Suspense } from "react";
 
 export default function VerifyPage() {

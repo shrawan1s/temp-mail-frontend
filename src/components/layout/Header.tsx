@@ -29,7 +29,7 @@ const useAuth = () => {
   return { isLoggedIn: Boolean(user), user }
 }
 
-export function Header() {
+export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const { isLoggedIn } = useAuth()
