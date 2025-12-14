@@ -53,9 +53,10 @@ export default function OAuthCallbackPage() {
                     toast.error(response.message || 'OAuth login failed')
                     setTimeout(() => router.push('/login'), 2000)
                 }
-            } catch (err: any) {
-                setError(err.message || 'OAuth login failed')
-                toast.error(err.message || 'OAuth login failed')
+            } catch (err: unknown) {
+                const message = err instanceof Error ? err.message : 'OAuth login failed'
+                setError(message)
+                toast.error(message)
                 setTimeout(() => router.push('/login'), 2000)
             }
         }
