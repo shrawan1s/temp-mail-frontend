@@ -31,6 +31,14 @@ export const authApi = {
     return api.post<ISimpleResponse>('/auth/password-reset/request', data);
   },
 
+  oauthLogin: async (data: { provider: string; code: string; redirectUri: string }) => {
+    return api.post<IAuthResponse>(`/auth/oauth/${data.provider}`, {
+      provider: data.provider,
+      code: data.code,
+      redirectUri: data.redirectUri,
+    });
+  },
+
   resetPassword: async (data: { token: string; newPassword: string }) => {
     return api.post<ISimpleResponse>('/auth/password-reset/confirm', data);
   },
