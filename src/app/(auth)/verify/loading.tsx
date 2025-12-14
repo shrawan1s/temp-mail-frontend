@@ -1,4 +1,4 @@
-import VerifyFormSkeleton from "@/components/skeleton/auth/VerifyFormSkeleton";
+import { VerifyFormSkeleton } from "@/components/skeleton";
 
 export default function Loading() {
     return (

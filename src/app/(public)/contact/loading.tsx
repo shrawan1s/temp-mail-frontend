@@ -1,10 +1,10 @@
-import { HeroSkeleton, ContactMethodsSkeleton, ContactFormSkeleton } from "@/components/skeleton/contact";
+import { ContactHeroSkeleton, ContactMethodsSkeleton, ContactFormSkeleton } from "@/components/skeleton";
 
 export default function Loading() {
     return (
         <>
             {/* Hero Section */}
-            <HeroSkeleton />
+            <ContactHeroSkeleton />
 
             {/* Contact Methods */}
             <ContactMethodsSkeleton />

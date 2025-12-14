@@ -9,7 +9,10 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import { SSOButtons } from '@/components/shared/SSOButtons';
+import { SSOButtons } from '@/components/shared';
+import { authApi } from '@/lib/auth';
+import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 const loginSchema = z.object({
     email: z.string().email("Please enter a valid email"),
@@ -19,6 +22,9 @@ const loginSchema = z.object({
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function LoginForm() {
+    const router = useRouter();
+    const { login } = useAuth();
+    
     const {
         register,
         handleSubmit,
@@ -33,8 +39,21 @@ export default function LoginForm() {
 
     const onSubmit = async (values: LoginFormValues) => {
         try {
-            console.log("Login values:", values)
-            toast.success("Logged in successfully!")
+            const response = await authApi.login({
+                email: values.email,
+                password: values.password,
+            });
+
+            if (!response.success) {
+                toast.error(response.message);
+                return;
+            }
+
+            if (response.access_token && response.refresh_token && response.user) {
+                login(response.access_token, response.refresh_token, response.user);
+                toast.success("Logged in successfully!");
+                router.push('/dashboard');
+            }
         } catch (err: unknown) {
             if (err instanceof Error) {
                 toast.error(err.message);

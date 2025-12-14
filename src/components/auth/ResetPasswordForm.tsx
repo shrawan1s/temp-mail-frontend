@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
+import { authApi } from '@/lib/auth';
 
 const resetPasswordSchema = z.object({
     email: z.string().email("Please enter a valid email"),
@@ -30,7 +31,10 @@ export default function ResetPasswordForm() {
 
     const onSubmit = async (values: ResetPasswordFormValues) => {
         try {
-            console.log("Reset password values:", values)
+            const response = await authApi.requestPasswordReset({
+                email: values.email,
+            });
+
             toast.success("Reset link sent! Check your inbox.")
         } catch (err: unknown) {
             if (err instanceof Error) {
@@ -47,7 +51,7 @@ export default function ResetPasswordForm() {
                 <div className="text-center">
                     <h1 className="text-2xl font-bold">Reset your password</h1>
                     <p className="text-sm text-muted-foreground">
-                        Enter your email and we’ll send you a link to reset your password.
+                        Enter your email and we&apos;ll send you a link to reset your password.
                     </p>
                 </div>
 

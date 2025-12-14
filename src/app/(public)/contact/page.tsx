@@ -2,10 +2,10 @@ import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 
 import {
-  HeroSkeleton,
+  ContactHeroSkeleton,
   ContactMethodsSkeleton,
   ContactFormSkeleton
-} from '@/components/skeleton/contact';
+} from '@/components/skeleton';
 
 const {
   ContactMethods,
@@ -21,7 +21,7 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero Section */}
-      <Suspense fallback={<HeroSkeleton />}>
+      <Suspense fallback={<ContactHeroSkeleton />}>
         <HeroSection />
       </Suspense>
 

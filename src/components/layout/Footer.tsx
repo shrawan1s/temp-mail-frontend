@@ -1,7 +1,7 @@
 import { Mail, Linkedin, Twitter, Heart } from 'lucide-react'
 import Link from 'next/link'
 
-export function Footer() {
+export default function Footer() {
   const footerLinks = {
     Product: [
       { name: 'Features', href: '/#features' },

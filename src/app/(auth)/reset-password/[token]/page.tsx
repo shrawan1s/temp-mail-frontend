@@ -1,5 +1,5 @@
 import { NewPasswordForm } from "@/components/auth";
-import NewPasswordFormSkeleton from "@/components/skeleton/auth/NewPasswordFormSkeleton";
+import { NewPasswordFormSkeleton } from "@/components/skeleton";
 import { Suspense } from "react";
 
 export default function NewPasswordPage() {

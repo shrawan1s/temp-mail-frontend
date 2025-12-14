@@ -1,4 +1,4 @@
-import NewPasswordFormSkeleton from "@/components/skeleton/auth/NewPasswordFormSkeleton";
+import { NewPasswordFormSkeleton } from "@/components/skeleton";
 
 export default function Loading() {
     return (

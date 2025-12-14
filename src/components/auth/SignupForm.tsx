@@ -9,7 +9,9 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import { SSOButtons } from '@/components/shared/SSOButtons';
+import { SSOButtons } from '@/components/shared';
+import { authApi } from '@/lib/auth';
+import { useRouter } from 'next/navigation';
 
 const signupSchema = z
     .object({
@@ -31,6 +33,8 @@ const signupSchema = z
 type SignupFormValues = z.infer<typeof signupSchema>
 
 export default function SignupForm() {
+    const router = useRouter();
+    
     const {
         register,
         handleSubmit,
@@ -47,8 +51,25 @@ export default function SignupForm() {
 
     const onSubmit = async (values: SignupFormValues) => {
         try {
-            console.log("Signup values:", values)
-            toast.success("Account created! Please verify your email.")
+            const response = await authApi.register({
+                email: values.email,
+                password: values.password,
+                name: values.name,
+            });
+
+            if (!response.success) {
+                toast.error(response.message);
+                return;
+            }
+
+            toast.success("Account created! Please verify your email.");
+            
+            // Redirect to verify page with userId
+            if (response.user_id) {
+                router.push(`/verify?userId=${response.user_id}&email=${encodeURIComponent(values.email)}`);
+            } else {
+                router.push('/verify');
+            }
         } catch (err: unknown) {
             if (err instanceof Error) {
                 toast.error(err.message);

@@ -5,12 +5,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Link from 'next/link';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { authApi } from '@/lib/auth';
 
 const passwordSchema = z.object({
     password: z.string()
@@ -27,9 +28,13 @@ const passwordSchema = z.object({
 type PasswordFormValues = z.infer<typeof passwordSchema>
 
 export default function NewPasswordForm() {
-    const { token } = useParams<{ token: string }>()
+    const params = useParams<{ token: string }>()
+    const searchParams = useSearchParams()
     const router = useRouter()
     const [loading, setLoading] = useState(false)
+
+    // Get token from URL params or query string
+    const token = params?.token || searchParams.get('token') || ''
 
     const { register, handleSubmit, formState: { errors } } = useForm<PasswordFormValues>({
         resolver: zodResolver(passwordSchema),
@@ -37,9 +42,22 @@ export default function NewPasswordForm() {
     })
 
     const onSubmit = async (values: PasswordFormValues) => {
+        if (!token) {
+            toast.error('Invalid reset link');
+            return;
+        }
+
         setLoading(true)
         try {
-            console.log("Password updated successfully!", values);
+            const response = await authApi.resetPassword({
+                token: token,
+                newPassword: values.password,
+            });
+
+            if (!response.success) {
+                toast.error(response.message);
+                return;
+            }
 
             toast.success('Password updated', { description: 'You can now log in with your new password.' })
             router.push('/login')
@@ -92,9 +110,6 @@ export default function NewPasswordForm() {
                         login
                     </Link>
                 </p>
-
-                {/* Hidden field just to show we have the token (optional) */}
-                <input type="hidden" value={token} readOnly />
             </div>
         </AuthCard>
     )
