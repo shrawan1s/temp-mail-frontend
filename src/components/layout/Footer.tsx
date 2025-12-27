@@ -19,6 +19,8 @@ export default function Footer() {
       { name: 'Privacy Policy', href: '/privacy-policy' },
       { name: 'Terms of Service', href: '/terms-of-service' },
       { name: 'Cookie Policy', href: '/cookie-policy' },
+      { name: 'Refund Policy', href: '/cancellation-refund' },
+      { name: 'Shipping Policy', href: '/shipping-policy' },
     ],
   }
 
