@@ -31,7 +31,7 @@ export default function ResetPasswordForm() {
 
     const onSubmit = async (values: ResetPasswordFormValues) => {
         try {
-            const response = await authApi.requestPasswordReset({
+            await authApi.requestPasswordReset({
                 email: values.email,
             });
 

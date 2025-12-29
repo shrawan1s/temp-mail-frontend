@@ -25,6 +25,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { useAuth } from '@/context/AuthContext'
+import { PlanKey } from '@/enums'
 import { toast } from 'sonner'
 
 export default function Header() {
@@ -119,12 +120,14 @@ export default function Header() {
                       Dashboard
                     </Button>
                   </Link>
-                  <Link href="/pricing">
-                    <Button className="flex items-center gap-1 bg-amber-500 hover:bg-amber-600 text-white shadow-lg hover:shadow-xl transition-all duration-300">
-                      <Crown className="w-4 h-4" />
-                      Premium
-                    </Button>
-                  </Link>
+                  {(!user?.plan || user.plan === PlanKey.FREE) && (
+                    <Link href="/pricing">
+                      <Button className="flex items-center gap-1 bg-amber-500 hover:bg-amber-600 text-white shadow-lg hover:shadow-xl transition-all duration-300">
+                        <Crown className="w-4 h-4" />
+                        Premium
+                      </Button>
+                    </Link>
+                  )}
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" className="p-1 rounded-full">

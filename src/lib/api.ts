@@ -20,7 +20,7 @@ class ApiClient {
     options: RequestInit = {}
   ): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
-    
+
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
       ...this.getAuthHeader(),
@@ -35,7 +35,7 @@ class ApiClient {
     const data = await response.json();
 
     if (!response.ok) {
-        const error = data as IApiError;
+      const error = data as IApiError;
       throw new Error(error.message || 'Request failed');
     }
 
