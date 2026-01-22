@@ -232,7 +232,7 @@ export default function AccountPage() {
           className="max-w-4xl mx-auto"
         >
           <div className="flex items-center mb-8">
-            <User className="w-8 h-8 mr-3" />
+            <User className="w-8 h-8 mr-3 dark:text-white" />
             <div>
               <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
                 Account
@@ -249,7 +249,7 @@ export default function AccountPage() {
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
-                    <CardTitle className="flex items-center">
+                    <CardTitle className="flex items-center dark:text-white">
                       <User className="w-5 h-5 mr-2" />
                       Profile
                     </CardTitle>
@@ -276,7 +276,7 @@ export default function AccountPage() {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="dark:bg-slate-700 dark:border-slate-600 dark:text-white dark:hover:bg-slate-600"
+                        className="dark:bg-transparent dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-800"
                         onClick={() => setIsEditing(false)}
                       >
                         <X className="w-4 h-4 mr-2" />
@@ -286,6 +286,7 @@ export default function AccountPage() {
                         size="sm"
                         onClick={handleSaveProfile}
                         disabled={isSaving}
+                        className="bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white shadow-sm"
                       >
                         {isSaving ? (
                           <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -320,35 +321,37 @@ export default function AccountPage() {
                     {isEditing ? (
                       <>
                         <div className="space-y-2">
-                          <Label htmlFor="name">Name</Label>
+                          <Label htmlFor="name" className="dark:text-slate-200">Name</Label>
                           <Input
                             id="name"
                             value={editName}
                             onChange={(e) => setEditName(e.target.value)}
                             placeholder="Your name"
+                            className="bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white dark:placeholder:text-slate-400"
                           />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="avatar">Avatar URL</Label>
+                          <Label htmlFor="avatar" className="dark:text-slate-200">Avatar URL</Label>
                           <Input
                             id="avatar"
                             value={editAvatarUrl}
                             onChange={(e) => setEditAvatarUrl(e.target.value)}
                             placeholder="https://example.com/avatar.jpg"
+                            className="bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white"
                           />
                         </div>
                       </>
                     ) : (
                       <>
                         <div className="flex items-center gap-3">
-                          <h3 className="text-2xl font-semibold">{user.name}</h3>
+                          <h3 className="text-2xl font-semibold dark:text-white">{user.name}</h3>
                           {getPlanBadge(user.plan)}
                         </div>
-                        <div className="flex items-center text-slate-600 dark:text-slate-400">
+                        <div className="flex items-center text-slate-600 dark:text-slate-300">
                           <Mail className="w-4 h-4 mr-2" />
                           {user.email}
                         </div>
-                        <div className="flex items-center text-slate-600 dark:text-slate-400">
+                        <div className="flex items-center text-slate-600 dark:text-slate-300">
                           <Calendar className="w-4 h-4 mr-2" />
                           Member since {formatDate(user.created_at)}
                         </div>
@@ -362,7 +365,7 @@ export default function AccountPage() {
             {/* Change Password Card */}
             <Card className="dark:bg-slate-800 dark:border-slate-700">
               <CardHeader>
-                <CardTitle className="flex items-center">
+                <CardTitle className="flex items-center dark:text-white">
                   <Lock className="w-5 h-5 mr-2" />
                   Change Password
                 </CardTitle>
@@ -372,39 +375,43 @@ export default function AccountPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="current-password">Current Password</Label>
+                  <Label htmlFor="current-password" className="dark:text-slate-200">Current Password</Label>
                   <Input
                     id="current-password"
                     type="password"
                     value={currentPassword}
                     onChange={(e) => setCurrentPassword(e.target.value)}
                     placeholder="Enter current password"
+                    className="bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white"
                   />
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="new-password">New Password</Label>
+                    <Label htmlFor="new-password" className="dark:text-slate-200">New Password</Label>
                     <Input
                       id="new-password"
                       type="password"
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
                       placeholder="Enter new password"
+                      className="bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="confirm-password">Confirm New Password</Label>
+                    <Label htmlFor="confirm-password" className="dark:text-slate-200">Confirm New Password</Label>
                     <Input
                       id="confirm-password"
                       type="password"
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder="Confirm new password"
+                      className="bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white dark:placeholder:text-slate-400"
                     />
                   </div>
                 </div>
                 <Button
                   onClick={handleChangePassword}
+                  className="bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white shadow-md w-full sm:w-auto"
                   disabled={
                     isChangingPassword ||
                     !currentPassword ||
@@ -449,16 +456,16 @@ export default function AccountPage() {
                         Delete Account
                       </Button>
                     </AlertDialogTrigger>
-                    <AlertDialogContent>
+                    <AlertDialogContent className="dark:bg-slate-900 dark:border-slate-800">
                       <AlertDialogHeader>
-                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                        <AlertDialogDescription>
+                        <AlertDialogTitle className="dark:text-white">Are you absolutely sure?</AlertDialogTitle>
+                        <AlertDialogDescription className="dark:text-slate-400">
                           This action cannot be undone. This will permanently delete
                           your account and remove all your data from our servers.
                         </AlertDialogDescription>
                       </AlertDialogHeader>
                       <div className="py-4">
-                        <Label htmlFor="delete-password">
+                        <Label htmlFor="delete-password" className="dark:text-slate-200">
                           Enter your password to confirm
                         </Label>
                         <Input
@@ -467,11 +474,11 @@ export default function AccountPage() {
                           value={deletePassword}
                           onChange={(e) => setDeletePassword(e.target.value)}
                           placeholder="Your password"
-                          className="mt-2"
+                          className="mt-2 bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white dark:placeholder:text-slate-400"
                         />
                       </div>
                       <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogCancel className="dark:bg-transparent dark:text-slate-200 dark:hover:bg-slate-800 dark:border-slate-700">Cancel</AlertDialogCancel>
                         <AlertDialogAction
                           onClick={handleDeleteAccount}
                           disabled={isDeleting}
