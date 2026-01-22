@@ -32,3 +32,18 @@ export interface IUserResponse {
   message: string;
   user?: IUser;
 }
+
+// Settings interfaces
+export interface IUserSettings {
+  dark_mode: boolean;
+  auto_refresh: boolean;
+  email_expiry: string;
+  notifications: boolean;
+  blocked_senders: string[];
+}
+
+export interface ISettingsResponse {
+  success: boolean;
+  message: string;
+  settings?: IUserSettings;
+}

@@ -28,7 +28,7 @@ const HeroSection = () => {
                     custom={i}
                     initial="initial"
                     animate="animate"
-                    className="absolute text-blue-200 dark:text-blue-700"
+                    className="absolute text-blue-200 dark:text-blue-700 z-0"
                     style={{
                         top: `${20 + i * 15}%`,
                         left: `${10 + (i * 20) % 80}%`,
@@ -99,7 +99,7 @@ const HeroSection = () => {
                             <Button
                                 variant="outline"
                                 size="lg"
-                                className="px-8 py-4 text-lg border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                className="px-8 py-4 text-lg bg-transparent border-slate-400 dark:border-slate-500 text-slate-800 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-700"
                             >
                                 Learn More
                             </Button>

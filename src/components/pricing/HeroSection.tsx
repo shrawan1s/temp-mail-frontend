@@ -101,7 +101,7 @@ export default function HeroSection() {
                             <Button
                                 variant="outline"
                                 size="lg"
-                                className="px-6 py-3 text-lg text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700"
+                                className="px-6 py-3 text-lg bg-transparent text-slate-700 dark:text-white border-slate-300 dark:border-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700"
                                 aria-label="Contact Sales"
                             >
                                 Contact Sales

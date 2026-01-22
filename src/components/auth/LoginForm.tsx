@@ -12,7 +12,7 @@ import { toast } from 'sonner';
 import { SSOButtons } from '@/components/shared';
 import { authApi } from '@/lib/auth';
 import { useAuth } from '@/context/AuthContext';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const loginSchema = z.object({
     email: z.string().email("Please enter a valid email"),
@@ -23,7 +23,11 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function LoginForm() {
     const router = useRouter();
+    const searchParams = useSearchParams();
     const { login } = useAuth();
+    
+    // Get return URL from query params
+    const returnTo = searchParams.get('returnTo') || '/dashboard';
     
     const {
         register,
@@ -52,7 +56,8 @@ export default function LoginForm() {
             if (response.access_token && response.refresh_token && response.user) {
                 login(response.access_token, response.refresh_token, response.user);
                 toast.success("Logged in successfully!");
-                router.push('/dashboard');
+                // Redirect to returnTo URL or dashboard
+                router.push(returnTo);
             }
         } catch (err: unknown) {
             if (err instanceof Error) {

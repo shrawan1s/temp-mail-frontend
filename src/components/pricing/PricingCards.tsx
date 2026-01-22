@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -90,6 +91,7 @@ export default function PricingCards() {
     const reduce = useReducedMotion()
     const { toast } = useToast()
     const { user, isAuthenticated, refreshUser } = useAuth()
+    const router = useRouter()
 
     // Current user's plan key and billing cycle
     const currentPlanKey = user?.plan || subscription?.planKey || 'free'
@@ -207,13 +209,14 @@ export default function PricingCards() {
             return
         }
 
-        // Check if user is authenticated
+        // Check if user is authenticated - redirect to login if not
         if (!isAuthenticated || !user?.id) {
             toast({
                 title: 'Login Required',
-                description: 'Please login to upgrade your plan.',
-                variant: 'destructive',
+                description: 'Please login to upgrade your plan. Redirecting...',
             })
+            // Redirect to login with return URL
+            router.push(`/login?returnTo=${encodeURIComponent(`/pricing?plan=${plan.key}&billing=${billing}`)}`)
             return
         }
 

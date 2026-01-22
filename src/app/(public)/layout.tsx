@@ -10,7 +10,7 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
     }, []);
 
     return (
-        <>
+        <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
             <Suspense fallback={<HeaderSkeleton />}>
                 <Header />
             </Suspense>
@@ -20,6 +20,7 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
             <Suspense fallback={<FooterSkeleton />}>
                 <Footer />
             </Suspense >
-        </>
+        </div>
     )
 }
+                            

@@ -1,4 +1,4 @@
-import { IAuthResponse, IRegisterResponse, ISimpleResponse, IUserResponse } from '@/interfaces';
+import { IAuthResponse, IRegisterResponse, ISimpleResponse, IUserResponse, ISettingsResponse } from '@/interfaces';
 import { api } from './api';
 
 // Auth API functions
@@ -49,6 +49,30 @@ export const authApi = {
 
   updateMe: async (data: { name?: string; avatarUrl?: string }) => {
     return api.put<IUserResponse>('/auth/me', data);
+  },
+
+  // Settings
+  getSettings: async () => {
+    return api.get<ISettingsResponse>('/auth/settings');
+  },
+
+  updateSettings: async (data: {
+    darkMode?: boolean;
+    autoRefresh?: boolean;
+    emailExpiry?: string;
+    notifications?: boolean;
+    blockedSenders?: string[];
+  }) => {
+    return api.put<ISettingsResponse>('/auth/settings', data);
+  },
+
+  // Account Management
+  changePassword: async (data: { currentPassword: string; newPassword: string }) => {
+    return api.post<ISimpleResponse>('/auth/change-password', data);
+  },
+
+  deleteAccount: async (data: { password?: string }) => {
+    return api.post<ISimpleResponse>('/auth/delete-account', data);
   },
 };
 

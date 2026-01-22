@@ -2,14 +2,16 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Check, Crown, Zap, Star } from 'lucide-react';
+import { Check, Crown, Zap, Star, Loader2 } from 'lucide-react';
 import { paymentApi } from '@/lib/payment';
 import { IPlan, ISubscription } from '@/interfaces';
 import { PlanTier, PlanStatus } from '@/enums';
+import { useRazorpay } from '@/hooks/useRazorpay';
+import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/context/AuthContext';
 
 const fadeInUp = {
@@ -88,12 +90,48 @@ const PremiumPlans = () => {
   const [billing, setBilling] = useState<Billing>('monthly');
   const [plans, setPlans] = useState<IPlan[]>(fallbackPlans);
   const [subscription, setSubscription] = useState<ISubscription | null>(null);
+  const [processingPlanId, setProcessingPlanId] = useState<string | null>(null);
   const reduce = useReducedMotion();
-  const { user, isAuthenticated } = useAuth();
+  const { toast } = useToast();
+  const { user, isAuthenticated, refreshUser } = useAuth();
+  const router = useRouter();
 
   // Current user's plan key and billing cycle
   const currentPlanKey = user?.plan || subscription?.planKey || 'free';
   const currentBillingCycle = subscription?.billingCycle || 'monthly';
+
+  const { initiatePayment, isLoading: paymentLoading } = useRazorpay({
+    onSuccess: async (result) => {
+      setProcessingPlanId(null);
+
+      // Refresh user data to update plan
+      await refreshUser();
+
+      // Update local subscription state
+      if (result.planKey && result.expiresAt) {
+        setSubscription({
+          planKey: result.planKey,
+          planName: result.planKey.charAt(0).toUpperCase() + result.planKey.slice(1),
+          status: 'active',
+          billingCycle: billing,
+          expiresAt: result.expiresAt,
+        });
+      }
+
+      toast({
+        title: '🎉 Payment Successful!',
+        description: `You've been upgraded to ${result.planKey?.toUpperCase()} plan. Expires: ${new Date(result.expiresAt || '').toLocaleDateString()}`,
+      });
+    },
+    onError: (error) => {
+      setProcessingPlanId(null);
+      toast({
+        title: 'Payment Failed',
+        description: error.message,
+        variant: 'destructive',
+      });
+    },
+  });
 
   // Fetch plans from API
   useEffect(() => {
@@ -155,28 +193,69 @@ const PremiumPlans = () => {
     return PlanStatus.SWITCH;
   };
 
+  // Handle plan selection - direct checkout from home page
+  const handleSelectPlan = async (plan: IPlan) => {
+    const status = getPlanStatus(plan.key);
+
+    // Current plan - do nothing
+    if (status === PlanStatus.CURRENT) {
+      toast({
+        title: 'Current Plan',
+        description: 'You are already on this plan.',
+      });
+      return;
+    }
+
+    // Downgrade - not supported yet
+    if (status === PlanStatus.DOWNGRADE) {
+      toast({
+        title: 'Downgrade Not Available',
+        description: 'Please contact support to downgrade your plan.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    // Check if user is authenticated - redirect to login if not
+    if (!isAuthenticated || !user?.id) {
+      toast({
+        title: 'Login Required',
+        description: 'Please login to upgrade your plan. Redirecting...',
+      });
+      // Redirect to login with return URL
+      router.push(`/login?returnTo=${encodeURIComponent(`/pricing?plan=${plan.key}&billing=${billing}`)}`);
+      return;
+    }
+
+    const price = billing === 'annual' ? plan.priceAnnual : plan.priceMonthly;
+    if (price === 0) {
+      return;
+    }
+
+    setProcessingPlanId(plan.id);
+    await initiatePayment(user.id, plan.id, billing, plan.name);
+  };
+
   // Get CTA config based on plan status
   const getCtaConfig = (plan: IPlan) => {
     const status = getPlanStatus(plan.key);
 
     if (status === PlanStatus.CURRENT) {
-      return { text: 'Current Plan', href: '#', disabled: true };
+      return { text: 'Current Plan', disabled: true };
     }
     if (status === PlanStatus.DOWNGRADE) {
-      return { text: 'Contact Support', href: '/contact', disabled: true };
+      return { text: 'Contact Support', disabled: true };
     }
     if (status === PlanStatus.SWITCH) {
-      // Same plan, different billing cycle - link to pricing page
+      // Same plan, different billing cycle
       return {
         text: `Switch to ${billing === 'annual' ? 'Annual' : 'Monthly'}`,
-        href: '/pricing',
         disabled: false
       };
     }
-    // Upgrade - link to pricing page
+    // Upgrade
     return {
       text: `Upgrade to ${plan.name}`,
-      href: '/pricing',
       disabled: false
     };
   };
@@ -239,22 +318,23 @@ const PremiumPlans = () => {
         </div>
 
         {/* plans grid */}
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid gap-8 lg:grid-cols-3 items-stretch">
           {plans.map((plan) => {
             const price = billing === 'annual' ? plan.priceAnnual : plan.priceMonthly;
             const isPopular = plan.isPopular;
             const status = getPlanStatus(plan.key);
             const ctaConfig = getCtaConfig(plan);
             const isCurrentPlan = status === PlanStatus.CURRENT;
+            const isProcessing = processingPlanId === plan.id;
 
             return (
               <article key={plan.id} aria-labelledby={`plan-${plan.key}`} className="flex">
                 <Card
                   className={`flex-1 flex flex-col border transition-shadow duration-200 relative ${isCurrentPlan
-                    ? 'border-green-300 dark:border-green-700 ring-2 ring-green-200 dark:ring-green-800'
+                    ? 'border-green-400 dark:border-green-500 ring-2 ring-green-200 dark:ring-green-800 bg-white dark:bg-slate-800'
                     : isPopular
-                      ? 'border-blue-100 dark:border-blue-800 bg-gradient-to-br from-blue-50 to-violet-50 dark:from-blue-950/50 dark:to-violet-950/30 shadow-2xl transform scale-[1.01]'
-                      : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-lg'
+                      ? 'border-blue-300 dark:border-blue-600 bg-gradient-to-br from-blue-50 to-violet-50 dark:from-slate-800 dark:to-slate-900 shadow-xl'
+                      : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-lg hover:shadow-xl'
                     }`}
                 >
                   {/* Current Plan badge */}
@@ -278,7 +358,7 @@ const PremiumPlans = () => {
                   )}
 
                   <CardHeader className="pt-8 text-center">
-                    <CardTitle id={`plan-${plan.key}`} className="text-2xl font-bold">
+                    <CardTitle id={`plan-${plan.key}`} className="text-2xl font-bold text-slate-900 dark:text-white">
                       {plan.name}
                     </CardTitle>
                     <CardDescription className="mt-2 text-slate-600 dark:text-slate-300">
@@ -322,20 +402,34 @@ const PremiumPlans = () => {
                     </ul>
 
                     <div className="pt-4">
-                      <Link href={ctaConfig.href}>
-                        <Button
-                          aria-label={`${ctaConfig.text} — ${plan.name}`}
-                          size="lg"
-                          className={`w-full ${isPopular && !isCurrentPlan ? 'bg-gradient-to-r from-blue-600 to-violet-600 text-white' : ''}`}
-                          variant={isCurrentPlan ? 'secondary' : isPopular ? 'default' : 'outline'}
-                          disabled={ctaConfig.disabled}
-                        >
-                          {!isCurrentPlan && plan.key === 'pro' && <Crown className="w-4 h-4 mr-2" />}
-                          {!isCurrentPlan && plan.key === 'business' && <Zap className="w-4 h-4 mr-2" />}
-                          {isCurrentPlan && <Check className="w-4 h-4 mr-2" />}
-                          {ctaConfig.text}
-                        </Button>
-                      </Link>
+                      <Button
+                        aria-label={`${ctaConfig.text} — ${plan.name}`}
+                        size="lg"
+                        className={`w-full ${
+                          isPopular && !isCurrentPlan 
+                            ? 'bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white shadow-lg' 
+                            : !isCurrentPlan && !isPopular
+                              ? 'dark:bg-slate-700 dark:border-slate-600 dark:text-white dark:hover:bg-slate-600'
+                              : ''
+                        }`}
+                        variant={isCurrentPlan ? 'secondary' : isPopular ? 'default' : 'outline'}
+                        disabled={ctaConfig.disabled || isProcessing || paymentLoading}
+                        onClick={() => handleSelectPlan(plan)}
+                      >
+                        {isProcessing ? (
+                          <>
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            Processing...
+                          </>
+                        ) : (
+                          <>
+                            {!isCurrentPlan && plan.key === 'pro' && <Crown className="w-4 h-4 mr-2" />}
+                            {!isCurrentPlan && plan.key === 'business' && <Zap className="w-4 h-4 mr-2" />}
+                            {isCurrentPlan && <Check className="w-4 h-4 mr-2" />}
+                            {ctaConfig.text}
+                          </>
+                        )}
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
