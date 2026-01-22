@@ -2,7 +2,7 @@ import Shimmer from "@/components/shared/Shimmer";
 
 export default function HeroSkeleton() {
     return (
-        <section className="relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-32">
+        <section className="relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-32 bg-white dark:bg-slate-950">
             {/* Radial gradient backplate (lighter for skeleton) */}
             <div className="absolute inset-0">
                 <div className="absolute inset-0 bg-gradient-to-r from-slate-100/40 via-slate-200/40 to-slate-100/40 dark:from-slate-800/40 dark:via-slate-700/40 dark:to-slate-800/40" />

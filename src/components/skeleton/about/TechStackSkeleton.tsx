@@ -20,7 +20,7 @@ export default function TechStackSkeleton() {
                     {[...Array(6)].map((_, idx) => (
                         <Card
                             key={idx}
-                            className="h-full flex flex-col border border-slate-200 dark:border-slate-700"
+                            className="h-full flex flex-col border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
                         >
                             <CardContent className="flex-1 flex items-start space-x-4 p-6">
                                 {/* Icon Placeholder */}
