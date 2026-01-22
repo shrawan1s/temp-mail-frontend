@@ -26,10 +26,10 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
                     An unexpected error occurred. Please try refreshing the page or go back to the homepage.
                 </p>
                 <div className="flex gap-3">
-                    <Button variant="outline" onClick={() => router.push('/')}>
+                    <Button variant="outline" onClick={() => router.push('/')} className="bg-transparent dark:bg-slate-700 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-600">
                         Go Home
                     </Button>
-                    <Button onClick={() => reset()}>
+                    <Button onClick={() => reset()} className="bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white">
                         Try Again
                     </Button>
                 </div>
