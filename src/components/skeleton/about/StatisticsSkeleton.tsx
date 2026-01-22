@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export default function StatisticsSkeleton() {
     return (
-        <section className="py-16 lg:py-24 bg-gradient-to-br from-blue-50 to-violet-50/50 dark:from-blue-950/30 dark:to-violet-950/30">
+        <section className="py-16 lg:py-24 bg-gradient-to-br from-blue-50 to-violet-50/50 dark:bg-slate-900 dark:from-slate-900 dark:to-slate-900">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid md:grid-cols-3 gap-8 text-center">
                     {[...Array(3)].map((_, index) => (

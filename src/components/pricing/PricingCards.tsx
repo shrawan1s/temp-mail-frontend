@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
+import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -90,6 +91,7 @@ export default function PricingCards() {
     const reduce = useReducedMotion()
     const { toast } = useToast()
     const { user, isAuthenticated, refreshUser } = useAuth()
+    const router = useRouter()
 
     // Current user's plan key and billing cycle
     const currentPlanKey = user?.plan || subscription?.planKey || 'free'
@@ -207,13 +209,14 @@ export default function PricingCards() {
             return
         }
 
-        // Check if user is authenticated
+        // Check if user is authenticated - redirect to login if not
         if (!isAuthenticated || !user?.id) {
             toast({
                 title: 'Login Required',
-                description: 'Please login to upgrade your plan.',
-                variant: 'destructive',
+                description: 'Please login to upgrade your plan. Redirecting...',
             })
+            // Redirect to login with return URL
+            router.push(`/login?returnTo=${encodeURIComponent(`/pricing?plan=${plan.key}&billing=${billing}`)}`)
             return
         }
 
@@ -321,9 +324,9 @@ export default function PricingCards() {
                             <article key={plan.id} aria-labelledby={`plan-${plan.key}`} className="flex">
                                 <Card
                                     className={`flex-1 flex flex-col border transition-shadow duration-200 relative ${isCurrentPlan
-                                        ? 'border-green-300 dark:border-green-700 ring-2 ring-green-200 dark:ring-green-800'
+                                        ? 'border-green-400 dark:border-green-500 ring-2 ring-green-200 dark:ring-green-800 bg-white dark:bg-slate-800'
                                         : isPopular
-                                            ? 'border-blue-100 dark:border-blue-800 bg-gradient-to-br from-blue-50 to-violet-50 dark:from-blue-950/50 dark:to-violet-950/30 shadow-2xl transform scale-[1.01]'
+                                            ? 'border-blue-300 dark:border-blue-600 bg-gradient-to-br from-blue-50 to-violet-50 dark:from-slate-800 dark:to-slate-900 shadow-2xl'
                                             : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-lg'
                                         }`}
                                 >
@@ -348,7 +351,7 @@ export default function PricingCards() {
                                     )}
 
                                     <CardHeader className="pt-8 text-center">
-                                        <CardTitle id={`plan-${plan.key}`} className="text-2xl font-bold">
+                                        <CardTitle id={`plan-${plan.key}`} className="text-2xl font-bold text-slate-900 dark:text-white">
                                             {plan.name}
                                         </CardTitle>
                                         <CardDescription className="mt-2 text-slate-600 dark:text-slate-300">

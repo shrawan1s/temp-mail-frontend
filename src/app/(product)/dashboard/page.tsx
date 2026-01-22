@@ -120,15 +120,15 @@ export default function InboxPage() {
           {/* Sidebar */}
           <div className="lg:col-span-1 space-y-6">
             {/* Current Email */}
-            <Card>
+            <Card className="dark:bg-slate-800 dark:border-slate-700">
               <CardHeader>
-                <CardTitle className="flex items-center justify-between">
+                <CardTitle className="flex items-center justify-between text-slate-900 dark:text-white">
                   <span className="flex items-center">
                     <Mail className="w-5 h-5 mr-2" />
                     Your Email
                   </span>
-                  <Button variant="ghost" size="sm" onClick={() => { }}>
-                    <Settings className="w-4 h-4" />
+                  <Button variant="ghost" size="sm" onClick={() => { }} className="dark:hover:bg-slate-700">
+                    <Settings className="w-4 h-4 text-slate-500 dark:text-slate-400" />
                   </Button>
                 </CardTitle>
               </CardHeader>
@@ -137,7 +137,7 @@ export default function InboxPage() {
                   <Input
                     value={currentEmail}
                     readOnly
-                    className="font-mono text-sm"
+                    className="font-mono text-sm bg-white dark:bg-slate-950 dark:text-white dark:border-slate-700"
                   />
                   <Button size="sm" onClick={copyEmail}>
                     <Copy className="w-4 h-4" />
@@ -153,6 +153,7 @@ export default function InboxPage() {
                     variant="outline"
                     onClick={refreshInbox}
                     disabled={isRefreshing}
+                    className="dark:bg-slate-800 dark:text-slate-300 dark:border-slate-600 dark:hover:bg-slate-700"
                   >
                     <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
                     Refresh
@@ -162,9 +163,9 @@ export default function InboxPage() {
             </Card>
 
             {/* Email List */}
-            <Card className="flex-1">
+            <Card className="flex-1 dark:bg-slate-800 dark:border-slate-700">
               <CardHeader>
-                <CardTitle className="flex items-center justify-between">
+                <CardTitle className="flex items-center justify-between text-slate-900 dark:text-white">
                   <span>Inbox ({emails.length})</span>
                   <Badge variant="secondary">{emails.filter(e => !e.isSpam).length} new</Badge>
                 </CardTitle>
@@ -187,7 +188,7 @@ export default function InboxPage() {
                         <div className="flex items-start justify-between mb-2">
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center space-x-2 mb-1">
-                              <p className="text-sm font-medium truncate">{email.from}</p>
+                              <p className="text-sm font-medium dark:text-white truncate">{email.from}</p>
                               {email.isSpam && (
                                 <Badge variant="destructive" className="text-xs">
                                   <AlertTriangle className="w-3 h-3 mr-1" />
@@ -205,6 +206,7 @@ export default function InboxPage() {
                           <Button
                             size="sm"
                             variant="ghost"
+                            className='dark:hover:bg-slate-700'
                             onClick={(e) => {
                               e.stopPropagation()
                               deleteEmail(email.id)
@@ -236,7 +238,7 @@ export default function InboxPage() {
             </Card>
 
             {/* Ads Component for Free Users */}
-            <Card className="border-dashed border-2 border-slate-200 dark:border-slate-700">
+            <Card className="border-dashed border-2 border-slate-200 dark:border-slate-700 dark:bg-slate-800">
               <CardContent className="p-4 text-center">
                 <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
                   Remove ads with Premium
@@ -250,13 +252,13 @@ export default function InboxPage() {
 
           {/* Email Preview */}
           <div className="lg:col-span-2">
-            <Card className="h-full">
+            <Card className="h-full dark:bg-slate-800 dark:border-slate-700">
               {selectedEmail ? (
                 <>
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <CardTitle className="text-xl mb-2">{selectedEmail.subject}</CardTitle>
+                        <CardTitle className="text-xl mb-2 dark:text-white">{selectedEmail.subject}</CardTitle>
                         <div className="flex items-center space-x-4 text-sm text-slate-600 dark:text-slate-400">
                           <span>From: {selectedEmail.from}</span>
                           <span>{formatTimeAgo(selectedEmail.timestamp)}</span>
@@ -272,7 +274,7 @@ export default function InboxPage() {
                         </div>
                       </div>
                       <div className="flex space-x-2">
-                        <Button size="sm" variant="outline">
+                        <Button size="sm" variant="outline" className="dark:bg-slate-800 dark:text-slate-300 dark:border-slate-600 dark:hover:bg-slate-700">
                           <Copy className="w-4 h-4 mr-2" />
                           Copy
                         </Button>
@@ -280,6 +282,7 @@ export default function InboxPage() {
                           size="sm"
                           variant="outline"
                           onClick={() => deleteEmail(selectedEmail.id)}
+                          className="dark:bg-slate-800 dark:text-slate-300 dark:border-slate-600 dark:hover:bg-slate-700"
                         >
                           <Trash2 className="w-4 h-4 mr-2" />
                           Delete
@@ -289,7 +292,7 @@ export default function InboxPage() {
                   </CardHeader>
                   <Separator />
                   <CardContent className="p-6">
-                    <div className="prose dark:prose-invert max-w-none">
+                    <div className="max-w-none text-slate-800 dark:text-slate-200">
                       <p className="whitespace-pre-wrap">{selectedEmail.content}</p>
                     </div>
                   </CardContent>

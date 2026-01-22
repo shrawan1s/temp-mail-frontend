@@ -108,7 +108,7 @@ const ContactPreview = () => {
             viewport={{ once: true }}
             variants={fadeInUp}
           >
-            <Card className="border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-2xl">
+            <Card className="border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-2xl">
               <CardContent className="p-8">
                 <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">
                   Quick Message
@@ -119,6 +119,7 @@ const ContactPreview = () => {
                     <div className="space-y-1">
                       <Input
                         placeholder="Your name"
+                        className="bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-400"
                         {...register('name')}
                       />
                       {errors.name && (
@@ -129,6 +130,7 @@ const ContactPreview = () => {
                       <Input
                         placeholder="Your email"
                         type="email"
+                        className="bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-400"
                         {...register('email')}
                       />
                       {errors.email && (
@@ -141,7 +143,7 @@ const ContactPreview = () => {
                     <Textarea
                       placeholder="Your message..."
                       rows={4}
-                      className="resize-none"
+                      className="resize-none bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-400"
                       {...register('message')}
                     />
                     {errors.message && (

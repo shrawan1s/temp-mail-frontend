@@ -12,7 +12,7 @@ import { toast } from 'sonner';
 import { SSOButtons } from '@/components/shared';
 import { authApi } from '@/lib/auth';
 import { useAuth } from '@/context/AuthContext';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const loginSchema = z.object({
     email: z.string().email("Please enter a valid email"),
@@ -23,8 +23,12 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function LoginForm() {
     const router = useRouter();
+    const searchParams = useSearchParams();
     const { login } = useAuth();
-    
+
+    // Get return URL from query params
+    const returnTo = searchParams.get('returnTo') || '/dashboard';
+
     const {
         register,
         handleSubmit,
@@ -52,7 +56,8 @@ export default function LoginForm() {
             if (response.access_token && response.refresh_token && response.user) {
                 login(response.access_token, response.refresh_token, response.user);
                 toast.success("Logged in successfully!");
-                router.push('/dashboard');
+                // Redirect to returnTo URL or dashboard
+                router.push(returnTo);
             }
         } catch (err: unknown) {
             if (err instanceof Error) {
@@ -67,19 +72,20 @@ export default function LoginForm() {
         <AuthCard imageSrc="/images/login.png" imageAlt="Login">
             <div className="space-y-6">
                 <div className="text-center">
-                    <h1 className="text-2xl font-bold">Welcome back</h1>
-                    <p className="text-sm text-muted-foreground">
+                    <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Welcome back</h1>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">
                         Sign in to continue to your inbox
                     </p>
                 </div>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     <div className="space-y-2">
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email" className="text-slate-900 dark:text-white">Email</Label>
                         <Input
                             id="email"
                             type="email"
                             placeholder="you@example.com"
+                            className="bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white placeholder:text-slate-400"
                             {...register("email")}
                         />
                         {errors.email && (
@@ -88,11 +94,12 @@ export default function LoginForm() {
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password" className="text-slate-900 dark:text-white">Password</Label>
                         <Input
                             id="password"
                             type="password"
                             placeholder="••••••••"
+                            className="bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white placeholder:text-slate-400"
                             {...register("password")}
                         />
                         {errors.password && (
@@ -100,7 +107,7 @@ export default function LoginForm() {
                         )}
                     </div>
 
-                    <Button type="submit" className="w-full" disabled={isSubmitting}>
+                    <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white" disabled={isSubmitting}>
                         {isSubmitting ? "Logging in..." : "Login"}
                     </Button>
 
@@ -115,10 +122,10 @@ export default function LoginForm() {
                 <SSOButtons />
 
                 <div className="flex items-center justify-between text-sm">
-                    <Link href="/reset-password" className="underline hover:text-primary">
+                    <Link href="/reset-password" className="text-slate-600 dark:text-slate-400 underline hover:text-blue-600 dark:hover:text-blue-400">
                         Forgot password?
                     </Link>
-                    <Link href="/signup" className="underline hover:text-primary">
+                    <Link href="/signup" className="text-slate-600 dark:text-slate-400 underline hover:text-blue-600 dark:hover:text-blue-400">
                         Create account
                     </Link>
                 </div>

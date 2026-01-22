@@ -91,7 +91,7 @@ export default function PrivacyPolicyPage() {
 
                         <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">9. Contact Information</h2>
 
-                        <p>
+                        <p className="text-slate-600 dark:text-slate-300 mb-8">
                             For questions about these Terms, please contact us at{' '}
                             <a href="mailto:info@svinfocraft.com" className="text-blue-600 hover:underline">
                                 info@svinfocraft.com
@@ -99,7 +99,7 @@ export default function PrivacyPolicyPage() {
                         </p>
                     </div>
                 </div>
-            </div >
-        </section >
+            </div>
+        </section>
     )
 }

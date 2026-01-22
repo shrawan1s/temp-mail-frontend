@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Toaster } from 'sonner';
 import { AuthProvider } from '@/context';
+import { ThemeProvider } from '@/components/utils/theme-provider';
 
 const geist = Geist({
   subsets: ['latin'],
@@ -85,9 +86,16 @@ export default function RootLayout({
       className={`${geist.variable} ${geistMono.variable}`}
     >
       <body className="font-sans antialiased">
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AuthProvider>
+            {children}
+          </AuthProvider>
+        </ThemeProvider>
         <Toaster richColors position="top-center" />
       </body>
     </html>

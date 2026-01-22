@@ -110,11 +110,11 @@ export default function FeatureComparison() {
                     <motion.div {...fade} className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 shadow-sm">
                         <table className="w-full table-fixed text-left">
                             <thead>
-                                <tr className="bg-slate-50 dark:bg-slate-900/40">
-                                    <th className="w-[38%] p-5" scope="col">Feature</th>
-                                    <th className="w-[20%] p-5 text-center" scope="col">Free</th>
-                                    <th className="w-[21%] p-5 text-center" scope="col">Pro</th>
-                                    <th className="w-[21%] p-5 text-center" scope="col">Business</th>
+                                <tr className="bg-slate-50 dark:bg-slate-800">
+                                    <th className="w-[38%] p-5 text-slate-900 dark:text-white font-semibold" scope="col">Feature</th>
+                                    <th className="w-[20%] p-5 text-center text-slate-900 dark:text-white font-semibold" scope="col">Free</th>
+                                    <th className="w-[21%] p-5 text-center text-slate-900 dark:text-white font-semibold" scope="col">Pro</th>
+                                    <th className="w-[21%] p-5 text-center text-slate-900 dark:text-white font-semibold" scope="col">Business</th>
                                 </tr>
                             </thead>
 

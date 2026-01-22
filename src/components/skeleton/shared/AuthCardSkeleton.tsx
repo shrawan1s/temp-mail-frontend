@@ -7,7 +7,7 @@ interface AuthCardSkeletonProps {
 
 export default function AuthCardSkeleton({ children }: AuthCardSkeletonProps) {
     return (
-        <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 overflow-hidden shadow-2xl border-0 rounded-2xl">
+        <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700 rounded-2xl">
             {/* Left: Form Skeleton */}
             <div className="p-8 flex flex-col justify-center space-y-6 bg-white dark:bg-slate-900">
                 {children}

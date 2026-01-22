@@ -2,7 +2,7 @@ import Shimmer from "@/components/shared/Shimmer";
 
 export default function HeroSkeleton() {
     return (
-        <section className="relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-32">
+        <section className="relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-32 bg-white dark:bg-slate-950">
             {/* Background gradients similar to HeroSection */}
             <div className="absolute inset-0">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-violet-600/5 to-cyan-600/5" />

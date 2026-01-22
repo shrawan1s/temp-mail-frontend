@@ -69,7 +69,7 @@ const ValuesGrid = () => (
             >
                 {values.map((value, index) => (
                     <motion.div key={index} variants={fadeInUp}>
-                        <Card className="h-full border-0 bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-850 shadow-lg hover:shadow-xl transition-all duration-300">
+                        <Card className="h-full border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 shadow-lg hover:shadow-xl transition-all duration-300">
                             <CardContent className="p-8">
                                 <div className={`w-14 h-14 bg-gradient-to-r ${value.color} rounded-2xl flex items-center justify-center mb-6`}>
                                     <value.icon className="w-7 h-7 text-white" />

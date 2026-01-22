@@ -115,11 +115,6 @@ export default function Header() {
                 </Link>
               ) : (
                 <>
-                  <Link href="/dashboard">
-                    <Button variant="ghost" className="text-slate-600 dark:text-slate-300">
-                      Dashboard
-                    </Button>
-                  </Link>
                   {(!user?.plan || user.plan === PlanKey.FREE) && (
                     <Link href="/pricing">
                       <Button className="flex items-center gap-1 bg-amber-500 hover:bg-amber-600 text-white shadow-lg hover:shadow-xl transition-all duration-300">
@@ -128,7 +123,7 @@ export default function Header() {
                       </Button>
                     </Link>
                   )}
-                  <DropdownMenu>
+                  <DropdownMenu modal={false}>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" className="p-1 rounded-full">
                         <Avatar className="w-8 h-8">
@@ -139,28 +134,28 @@ export default function Header() {
                         </Avatar>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuContent align="end" className="w-56 dark:bg-slate-800 dark:border-slate-700">
                       <div className="px-3 py-2">
-                        <p className="text-sm font-medium">{user?.name}</p>
-                        <p className="text-xs text-slate-500">{user?.email}</p>
+                        <p className="text-sm font-medium text-slate-900 dark:text-white">{user?.name}</p>
+                        <p className="text-xs text-slate-500 dark:text-slate-400">{user?.email}</p>
                       </div>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem asChild>
+                      <DropdownMenuSeparator className="bg-slate-200 dark:bg-slate-600" />
+                      <DropdownMenuItem asChild className="text-slate-700 dark:text-slate-200 focus:bg-slate-100 dark:focus:bg-slate-700">
                         <Link href="/dashboard" className="cursor-pointer">
-                          <Mail className="w-4 h-4 mr-2" />
+                          <Mail className="w-4 h-4 mr-2 text-slate-600 dark:text-slate-300" />
                           Dashboard
                         </Link>
                       </DropdownMenuItem>
-                      <DropdownMenuItem asChild>
+                      <DropdownMenuItem asChild className="text-slate-700 dark:text-slate-200 focus:bg-slate-100 dark:focus:bg-slate-700">
                         <Link href="/settings" className="cursor-pointer">
-                          <Settings className="w-4 h-4 mr-2" />
+                          <Settings className="w-4 h-4 mr-2 text-slate-600 dark:text-slate-300" />
                           Settings
                         </Link>
                       </DropdownMenuItem>
-                      <DropdownMenuSeparator />
+                      <DropdownMenuSeparator className="bg-slate-200 dark:bg-slate-600" />
                       <DropdownMenuItem
                         onClick={() => setShowLogoutDialog(true)}
-                        className="text-red-600 cursor-pointer"
+                        className="text-red-600 dark:text-red-400 cursor-pointer focus:bg-red-50 dark:focus:bg-red-900/30"
                       >
                         <LogOut className="w-4 h-4 mr-2" />
                         Sign Out
@@ -250,15 +245,15 @@ export default function Header() {
 
       {/* Logout Confirmation Dialog */}
       <AlertDialog open={showLogoutDialog} onOpenChange={setShowLogoutDialog}>
-        <AlertDialogContent>
+        <AlertDialogContent className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
           <AlertDialogHeader>
-            <AlertDialogTitle>Sign out of your account?</AlertDialogTitle>
-            <AlertDialogDescription>
+            <AlertDialogTitle className="text-slate-900 dark:text-white">Sign out of your account?</AlertDialogTitle>
+            <AlertDialogDescription className="text-slate-600 dark:text-slate-300">
               You will need to sign in again to access your dashboard and emails.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel className="bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-600">Cancel</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleLogout}
               className="bg-red-600 hover:bg-red-700 text-white"

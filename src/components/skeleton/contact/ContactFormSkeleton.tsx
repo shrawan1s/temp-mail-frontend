@@ -16,7 +16,7 @@ export default function ContactFormSkeleton() {
                 </div>
 
                 {/* Card Skeleton */}
-                <Card className="border-0 shadow-xl">
+                <Card className="border border-slate-200 dark:border-slate-700 shadow-xl bg-white dark:bg-slate-800">
                     <CardHeader>
                         <div className="h-6 w-40 rounded-md bg-slate-200 dark:bg-slate-700 relative overflow-hidden">
                             <Shimmer />

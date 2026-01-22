@@ -2,7 +2,7 @@ import Shimmer from "@/components/shared/Shimmer";
 
 export default function HeroSkeleton() {
     return (
-        <section className="pt-32 pb-20 lg:pt-40 lg:pb-32 relative overflow-hidden">
+        <section className="pt-32 pb-20 lg:pt-40 lg:pb-32 relative overflow-hidden bg-white dark:bg-slate-950">
             {/* Floating icons placeholders */}
             {[...Array(5)].map((_, i) => (
                 <div

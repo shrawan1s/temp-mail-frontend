@@ -130,7 +130,7 @@ const FeaturesGrid = () => {
         >
           {features.map((feature, index) => (
             <motion.div key={index} variants={fadeInUp}>
-              <Card className="relative h-full border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden">
+              <Card className="relative h-full border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden">
 
                 {/* Pro badge */}
                 {feature.premium && (

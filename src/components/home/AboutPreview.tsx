@@ -112,7 +112,7 @@ const AboutPreview = () => {
             variants={fadeInUp}
             className="relative"
           >
-            <Card className="border-0 bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-850 shadow-2xl">
+            <Card className="border border-slate-200 dark:border-slate-700 bg-gradient-to-br from-slate-50 to-white dark:from-slate-800 dark:to-slate-900 shadow-2xl">
               <CardContent className="p-8">
                 <div className="space-y-6">
                   <div className="flex items-center space-x-4">

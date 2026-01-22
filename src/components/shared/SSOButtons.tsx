@@ -49,7 +49,7 @@ export function SSOButtons() {
             <Button
                 type="button"
                 variant="outline"
-                className="w-full flex items-center justify-center gap-2"
+                className="w-full flex items-center justify-center gap-2 bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-700 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-600"
                 onClick={() => handleSSOLogin("google")}
                 disabled={!GOOGLE_CLIENT_ID}
             >
@@ -59,7 +59,7 @@ export function SSOButtons() {
             <Button
                 type="button"
                 variant="outline"
-                className="w-full flex items-center justify-center gap-2"
+                className="w-full flex items-center justify-center gap-2 bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-700 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-600"
                 onClick={() => handleSSOLogin("github")}
                 disabled={!GITHUB_CLIENT_ID}
             >

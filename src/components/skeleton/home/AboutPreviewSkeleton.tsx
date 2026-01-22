@@ -61,7 +61,7 @@ const AboutPreviewSkeleton = () => {
                     </div>
 
                     {/* Right Skeleton Card */}
-                    <Card className="border-0 shadow-2xl">
+                    <Card className="border border-slate-200 dark:border-slate-700 shadow-xl bg-white dark:bg-slate-800">
                         <CardContent className="p-8 space-y-6">
                             {[...Array(3)].map((_, i) => (
                                 <div

@@ -81,7 +81,7 @@ const UseCases = () => {
         >
           {useCases.map((useCase, index) => (
             <motion.div key={index} variants={fadeInUp}>
-              <Card className="h-full border-0 bg-white dark:bg-slate-800 shadow-xl hover:shadow-2xl transition-all duration-300 group">
+              <Card className="h-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-xl hover:shadow-2xl transition-all duration-300 group">
                 <CardContent className="p-8 flex flex-col justify-between space-y-2 h-full">
                   {/* Top: Icon + Badge + Text */}
                   <div>

@@ -15,7 +15,7 @@ export default function Maintenance() {
                 transition={{ duration: 0.5 }}
                 className="text-center max-w-2xl mx-auto"
             >
-                <Card className="border-0 shadow-xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
+                <Card className="border border-slate-200 dark:border-slate-700 shadow-xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm">
                     <CardContent className="p-12">
                         <motion.div
                             initial={{ scale: 0 }}
@@ -52,13 +52,13 @@ export default function Maintenance() {
                             className="flex flex-col sm:flex-row gap-4 justify-center"
                         >
                             <Link href="/">
-                                <Button size="lg" className="px-6 py-3">
+                                <Button size="lg" className="px-6 py-3 bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white">
                                     <Home className="w-5 h-5 mr-2" />
                                     Go Home
                                 </Button>
                             </Link>
 
-                            <Button variant="outline" size="lg" onClick={() => window.location.reload()} className="px-6 py-3">
+                            <Button variant="outline" size="lg" onClick={() => window.location.reload()} className="px-6 py-3 bg-transparent dark:bg-slate-700 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-600">
                                 <RefreshCw className="w-5 h-5 mr-2" />
                                 Refresh
                             </Button>
