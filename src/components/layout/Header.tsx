@@ -245,15 +245,15 @@ export default function Header() {
 
       {/* Logout Confirmation Dialog */}
       <AlertDialog open={showLogoutDialog} onOpenChange={setShowLogoutDialog}>
-        <AlertDialogContent>
+        <AlertDialogContent className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700">
           <AlertDialogHeader>
-            <AlertDialogTitle>Sign out of your account?</AlertDialogTitle>
-            <AlertDialogDescription>
+            <AlertDialogTitle className="text-slate-900 dark:text-white">Sign out of your account?</AlertDialogTitle>
+            <AlertDialogDescription className="text-slate-600 dark:text-slate-300">
               You will need to sign in again to access your dashboard and emails.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel className="bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-600">Cancel</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleLogout}
               className="bg-red-600 hover:bg-red-700 text-white"
