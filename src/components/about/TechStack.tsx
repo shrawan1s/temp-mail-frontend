@@ -107,7 +107,7 @@ const TechStack = () => (
                     const Icon = tech.icon;
                     return (
                         <motion.div key={idx} variants={fadeInUp}>
-                            <Card className="h-full flex flex-col border border-slate-200 dark:border-slate-700 
+                            <Card className="h-full flex flex-col border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800
                                hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
                                 <CardContent className="flex-1 flex items-start space-x-4 p-6">
                                     {/* Neutral circle with colored icon */}

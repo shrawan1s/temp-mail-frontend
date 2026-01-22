@@ -89,7 +89,7 @@ const ContactForm = () => {
                     viewport={{ once: true }}
                     variants={fadeInUp}
                 >
-                    <Card className="border-0 shadow-xl">
+                    <Card className="border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-xl">
                         <CardHeader>
                             <CardTitle className="text-xl font-semibold text-slate-900 dark:text-white">
                                 Contact Form
@@ -99,23 +99,25 @@ const ContactForm = () => {
                             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                                 <div className="grid md:grid-cols-2 gap-4">
                                     <div className="space-y-2">
-                                        <Label htmlFor="name">Name <span className='text-red-500'>*</span></Label>
+                                        <Label htmlFor="name" className="text-slate-900 dark:text-white">Name <span className='text-red-500'>*</span></Label>
                                         <Input
                                             id="name"
                                             {...register('name')}
                                             placeholder="Your full name"
+                                            className="bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white placeholder:text-slate-400"
                                         />
                                         {errors.name && (
                                             <p className="text-sm text-red-500">{errors.name.message}</p>
                                         )}
                                     </div>
                                     <div className="space-y-2">
-                                        <Label htmlFor="email">Email <span className='text-red-500'>*</span></Label>
+                                        <Label htmlFor="email" className="text-slate-900 dark:text-white">Email <span className='text-red-500'>*</span></Label>
                                         <Input
                                             id="email"
                                             type="email"
                                             {...register('email')}
                                             placeholder="your@email.com"
+                                            className="bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white placeholder:text-slate-400"
                                         />
                                         {errors.email && (
                                             <p className="text-sm text-red-500">{errors.email.message}</p>
@@ -124,11 +126,12 @@ const ContactForm = () => {
                                 </div>
 
                                 <div className="space-y-2">
-                                    <Label htmlFor="subject">Subject <span className='text-red-500'>*</span></Label>
+                                    <Label htmlFor="subject" className="text-slate-900 dark:text-white">Subject <span className='text-red-500'>*</span></Label>
                                     <Input
                                         id="subject"
                                         {...register('subject')}
                                         placeholder="What's this about?"
+                                        className="bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white placeholder:text-slate-400"
                                     />
                                     {errors.subject && (
                                         <p className="text-sm text-red-500">{errors.subject.message}</p>
@@ -136,13 +139,13 @@ const ContactForm = () => {
                                 </div>
 
                                 <div className="space-y-2">
-                                    <Label htmlFor="message">Message <span className='text-red-500'>*</span></Label>
+                                    <Label htmlFor="message" className="text-slate-900 dark:text-white">Message <span className='text-red-500'>*</span></Label>
                                     <Textarea
                                         id="message"
                                         rows={6}
                                         {...register('message')}
                                         placeholder="Tell us more about your inquiry..."
-                                        className="resize-none"
+                                        className="resize-none bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 text-slate-900 dark:text-white placeholder:text-slate-400"
                                     />
                                     {errors.message && (
                                         <p className="text-sm text-red-500">{errors.message.message}</p>

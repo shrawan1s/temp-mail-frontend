@@ -31,10 +31,10 @@ export default function HeroSection() {
 
 
     return (
-        <section className="relative overflow-hidden pt-24 pb-20 lg:pt-36 lg:pb-28">
+        <section className="relative overflow-hidden pt-24 pb-20 lg:pt-36 lg:pb-28 bg-white dark:bg-slate-900">
             {/* decorative background */}
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-r from-yellow-50/40 via-orange-50/30 to-red-50/10 dark:from-yellow-900/6 dark:via-orange-900/6 dark:to-red-900/4" />
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-50/40 via-orange-50/30 to-red-50/10 dark:from-yellow-900/10 dark:via-orange-900/5 dark:to-transparent" />
                 <motion.div
                     aria-hidden
                     className="absolute -left-12 -top-8 w-72 h-72 rounded-full bg-yellow-400/10 blur-3xl"

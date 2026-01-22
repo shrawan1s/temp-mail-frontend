@@ -324,9 +324,9 @@ export default function PricingCards() {
                             <article key={plan.id} aria-labelledby={`plan-${plan.key}`} className="flex">
                                 <Card
                                     className={`flex-1 flex flex-col border transition-shadow duration-200 relative ${isCurrentPlan
-                                        ? 'border-green-300 dark:border-green-700 ring-2 ring-green-200 dark:ring-green-800'
+                                        ? 'border-green-400 dark:border-green-500 ring-2 ring-green-200 dark:ring-green-800 bg-white dark:bg-slate-800'
                                         : isPopular
-                                            ? 'border-blue-100 dark:border-blue-800 bg-gradient-to-br from-blue-50 to-violet-50 dark:from-blue-950/50 dark:to-violet-950/30 shadow-2xl transform scale-[1.01]'
+                                            ? 'border-blue-300 dark:border-blue-600 bg-gradient-to-br from-blue-50 to-violet-50 dark:from-slate-800 dark:to-slate-900 shadow-2xl'
                                             : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-lg'
                                         }`}
                                 >
@@ -351,7 +351,7 @@ export default function PricingCards() {
                                     )}
 
                                     <CardHeader className="pt-8 text-center">
-                                        <CardTitle id={`plan-${plan.key}`} className="text-2xl font-bold">
+                                        <CardTitle id={`plan-${plan.key}`} className="text-2xl font-bold text-slate-900 dark:text-white">
                                             {plan.name}
                                         </CardTitle>
                                         <CardDescription className="mt-2 text-slate-600 dark:text-slate-300">
