@@ -3,11 +3,11 @@
 import { useState, useCallback } from 'react';
 import { paymentApi } from '@/lib';
 import { 
-    IVerifyPaymentResponse, 
     IRazorpayPaymentResponse, 
     IRazorpayPaymentError, 
     IRazorpayOptions,
-    IRazorpayConstructor 
+    IRazorpayConstructor,
+    IUseRazorpayOptions
 } from '@/interfaces';
 
 declare global {
@@ -16,12 +16,7 @@ declare global {
     }
 }
 
-interface UseRazorpayOptions {
-    onSuccess?: (response: IVerifyPaymentResponse) => void;
-    onError?: (error: Error) => void;
-}
-
-export function useRazorpay(options: UseRazorpayOptions = {}) {
+export function useRazorpay(options: IUseRazorpayOptions = {}) {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<Error | null>(null);
 

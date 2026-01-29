@@ -1,27 +1,13 @@
 'use client'
 
-import React, { SVGProps } from 'react';
+import React from 'react';
 import { motion, MotionProps, useReducedMotion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check, X, Zap, Shield, Clock, Mail, Star, Sparkles } from 'lucide-react';
+import { IFeature } from '@/interfaces';
 
-type IconType = React.ComponentType<SVGProps<SVGSVGElement>>;
-
-type Feature = {
-    key: string
-    icon: IconType
-    title: string
-    description?: string
-    beta?: boolean
-    values: {
-        free: string | boolean
-        pro: string | boolean
-        business: string | boolean
-    }
-}
-
-const features: Feature[] = [
+const features: IFeature[] = [
     {
         key: 'unlimited_emails',
         icon: Mail,

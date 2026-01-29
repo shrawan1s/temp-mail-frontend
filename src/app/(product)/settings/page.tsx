@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { motion } from 'framer-motion';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -38,6 +40,7 @@ import { Header } from '@/components/layout';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/context/AuthContext';
 import { authApi } from '@/lib/auth';
+import { blockedSenderSchema, BlockedSenderFormData } from '@/lib/validation';
 import Link from 'next/link';
 
 export default function SettingsPage() {
@@ -53,7 +56,14 @@ export default function SettingsPage() {
   const [notifications, setNotifications] = useState(true);
   const [emailExpiry, setEmailExpiry] = useState('24h');
   const [blockedSenders, setBlockedSenders] = useState<string[]>([]);
-  const [newBlockedSender, setNewBlockedSender] = useState('');
+
+  // Blocked sender form with validation
+  const blockedSenderForm = useForm<BlockedSenderFormData>({
+    resolver: zodResolver(blockedSenderSchema),
+    defaultValues: {
+      email: '',
+    },
+  });
 
   // Ensure mounted before accessing theme to avoid hydration mismatch
   useEffect(() => {
@@ -124,13 +134,17 @@ export default function SettingsPage() {
     }
   };
 
-  const addBlockedSender = () => {
-    if (newBlockedSender && !blockedSenders.includes(newBlockedSender)) {
-      setBlockedSenders([...blockedSenders, newBlockedSender]);
-      setNewBlockedSender('');
+  const addBlockedSender = (data: BlockedSenderFormData) => {
+    if (!blockedSenders.includes(data.email)) {
+      setBlockedSenders([...blockedSenders, data.email]);
+      blockedSenderForm.reset();
       toast({
         title: 'Sender blocked',
-        description: `${newBlockedSender} has been added to your blocked list`,
+        description: `${data.email} has been added to your blocked list`,
+      });
+    } else {
+      blockedSenderForm.setError('email', {
+        message: 'This email is already blocked',
       });
     }
   };
@@ -325,15 +339,21 @@ export default function SettingsPage() {
                     Emails from these addresses will be automatically deleted
                   </p>
 
-                  <div className="flex space-x-2 mb-4">
-                    <Input
-                      placeholder="Enter email address to block"
-                      value={newBlockedSender}
-                      onChange={(e) => setNewBlockedSender(e.target.value)}
-                      onKeyPress={(e) => e.key === 'Enter' && addBlockedSender()}
-                      className="bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white"
-                    />
-                    <Button onClick={addBlockedSender}>Block</Button>
+                  <div className="space-y-2 mb-4">
+                    <div className="flex space-x-2">
+                      <Input
+                        placeholder="Enter email address to block"
+                        {...blockedSenderForm.register('email')}
+                        onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), blockedSenderForm.handleSubmit(addBlockedSender)())}
+                        className={`bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white ${
+                          blockedSenderForm.formState.errors.email ? 'border-red-500' : ''
+                        }`}
+                      />
+                      <Button onClick={() => blockedSenderForm.handleSubmit(addBlockedSender)()}>Block</Button>
+                    </div>
+                    {blockedSenderForm.formState.errors.email && (
+                      <p className="text-sm text-red-500">{blockedSenderForm.formState.errors.email.message}</p>
+                    )}
                   </div>
 
                   <div className="space-y-2">
