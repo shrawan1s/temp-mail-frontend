@@ -9,12 +9,10 @@ import { Badge } from '@/components/ui/badge'
 import { Check, Crown, Zap, Star, Loader2 } from 'lucide-react'
 import { paymentApi } from '@/lib/payment'
 import { IPlan, ISubscription } from '@/interfaces'
-import { PlanTier, PlanStatus } from '@/enums'
+import { PlanTier, PlanStatus, BillingCycle } from '@/enums'
 import { useRazorpay } from '@/hooks/useRazorpay'
 import { useToast } from '@/hooks/use-toast'
 import { useAuth } from '@/context/AuthContext'
-
-type Billing = 'monthly' | 'annual'
 
 // Get plan tier from key using enum
 const getPlanTier = (key: string): number => {
@@ -83,7 +81,7 @@ const fallbackPlans: IPlan[] = [
 ]
 
 export default function PricingCards() {
-    const [billing, setBilling] = useState<Billing>('monthly')
+    const [billing, setBilling] = useState<BillingCycle>(BillingCycle.MONTHLY)
     const [plans, setPlans] = useState<IPlan[]>(fallbackPlans)
     const [subscription, setSubscription] = useState<ISubscription | null>(null)
     const [loadingPlans, setLoadingPlans] = useState(true)
@@ -95,7 +93,7 @@ export default function PricingCards() {
 
     // Current user's plan key and billing cycle
     const currentPlanKey = user?.plan || subscription?.planKey || 'free'
-    const currentBillingCycle = subscription?.billingCycle || 'monthly'
+    const currentBillingCycle = subscription?.billingCycle || BillingCycle.MONTHLY
 
     const { initiatePayment, isLoading: paymentLoading } = useRazorpay({
         onSuccess: async (result) => {
@@ -220,7 +218,7 @@ export default function PricingCards() {
             return
         }
 
-        const price = billing === 'annual' ? plan.priceAnnual : plan.priceMonthly
+        const price = billing === BillingCycle.ANNUAL ? plan.priceAnnual : plan.priceMonthly
         if (price === 0) {
             return
         }
@@ -248,7 +246,7 @@ export default function PricingCards() {
         if (status === PlanStatus.SWITCH) {
             // Same plan, different billing cycle
             return { 
-                text: `Switch to ${billing === 'annual' ? 'Annual' : 'Monthly'}`, 
+                text: `Switch to ${billing === BillingCycle.ANNUAL ? 'Annual' : 'Monthly'}`, 
                 disabled: false, 
                 variant: 'outline' as const 
             }
@@ -285,9 +283,9 @@ export default function PricingCards() {
                         <button
                             role="tab"
                             id="monthly-tab"
-                            aria-selected={billing === 'monthly'}
-                            onClick={() => setBilling('monthly')}
-                            className={`px-4 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 transition ${billing === 'monthly'
+                            aria-selected={billing === BillingCycle.MONTHLY}
+                            onClick={() => setBilling(BillingCycle.MONTHLY)}
+                            className={`px-4 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 transition ${billing === BillingCycle.MONTHLY
                                 ? 'bg-white dark:bg-slate-900 shadow-sm text-slate-900 dark:text-white'
                                 : 'text-slate-600 dark:text-slate-300'
                                 }`}
@@ -298,9 +296,9 @@ export default function PricingCards() {
                         <button
                             role="tab"
                             id="annual-tab"
-                            aria-selected={billing === 'annual'}
-                            onClick={() => setBilling('annual')}
-                            className={`px-4 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 transition ${billing === 'annual'
+                            aria-selected={billing === BillingCycle.ANNUAL}
+                            onClick={() => setBilling(BillingCycle.ANNUAL)}
+                            className={`px-4 py-2 rounded-full text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-500 transition ${billing === BillingCycle.ANNUAL
                                 ? 'bg-white dark:bg-slate-900 shadow-sm text-slate-900 dark:text-white'
                                 : 'text-slate-600 dark:text-slate-300'
                                 }`}
@@ -313,7 +311,7 @@ export default function PricingCards() {
                 {/* plans grid */}
                 <div className="grid gap-8 lg:grid-cols-3">
                     {plans.map((plan) => {
-                        const price = billing === 'annual' ? plan.priceAnnual : plan.priceMonthly
+                        const price = billing === BillingCycle.ANNUAL ? plan.priceAnnual : plan.priceMonthly
                         const isPopular = plan.isPopular
                         const isProcessing = processingPlanId === plan.id
                         const status = getPlanStatus(plan.key)
@@ -372,12 +370,12 @@ export default function PricingCards() {
                                             </div>
 
                                             <div className="text-base text-slate-500 dark:text-slate-400 ml-2 mb-1">
-                                                /{billing === 'monthly' ? 'mo' : 'yr'}
+                                                /{billing === BillingCycle.MONTHLY ? 'mo' : 'yr'}
                                             </div>
                                         </div>
 
                                         {/* savings microcopy */}
-                                        {billing === 'annual' && price > 0 && (
+                                        {billing === BillingCycle.ANNUAL && price > 0 && (
                                             <div className="mt-2 text-sm text-slate-600 dark:text-slate-300">
                                                 Save {Math.round(((plan.priceMonthly * 12 - plan.priceAnnual) / (plan.priceMonthly * 12)) * 100)}% with annual billing
                                             </div>

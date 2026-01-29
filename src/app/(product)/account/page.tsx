@@ -1,7 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -40,6 +42,7 @@ import { Header } from '@/components/layout';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/context/AuthContext';
 import { authApi } from '@/lib/auth';
+import { profileSchema, passwordChangeSchema, ProfileFormData, PasswordChangeFormData } from '@/lib/validation';
 import { useRouter } from 'next/navigation';
 
 export default function AccountPage() {
@@ -49,26 +52,49 @@ export default function AccountPage() {
 
   // Profile editing state
   const [isEditing, setIsEditing] = useState(false);
-  const [editName, setEditName] = useState(user?.name || '');
-  const [editAvatarUrl, setEditAvatarUrl] = useState(user?.avatar_url || '');
   const [isSaving, setIsSaving] = useState(false);
 
-  // Change password state
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  // Profile form with validation
+  const profileForm = useForm<ProfileFormData>({
+    resolver: zodResolver(profileSchema),
+    defaultValues: {
+      name: user?.name || '',
+      avatarUrl: user?.avatar_url || '',
+    },
+  });
+
+  // Password change form with validation
+  const passwordForm = useForm<PasswordChangeFormData>({
+    resolver: zodResolver(passwordChangeSchema),
+    defaultValues: {
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: '',
+    },
+  });
+
   const [isChangingPassword, setIsChangingPassword] = useState(false);
 
   // Delete account state
   const [deletePassword, setDeletePassword] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const handleSaveProfile = async () => {
+  // Update form values when user changes
+  useEffect(() => {
+    if (user) {
+      profileForm.reset({
+        name: user.name,
+        avatarUrl: user.avatar_url || '',
+      });
+    }
+  }, [user, profileForm]);
+
+  const handleSaveProfile = async (data: ProfileFormData) => {
     setIsSaving(true);
     try {
       const response = await authApi.updateMe({
-        name: editName,
-        avatarUrl: editAvatarUrl,
+        name: data.name,
+        avatarUrl: data.avatarUrl,
       });
 
       if (response.success) {
@@ -96,36 +122,16 @@ export default function AccountPage() {
     }
   };
 
-  const handleChangePassword = async () => {
-    if (newPassword !== confirmPassword) {
-      toast({
-        title: 'Error',
-        description: 'New passwords do not match',
-        variant: 'destructive',
-      });
-      return;
-    }
-
-    if (newPassword.length < 8) {
-      toast({
-        title: 'Error',
-        description: 'New password must be at least 8 characters',
-        variant: 'destructive',
-      });
-      return;
-    }
-
+  const handleChangePassword = async (data: PasswordChangeFormData) => {
     setIsChangingPassword(true);
     try {
       const response = await authApi.changePassword({
-        currentPassword,
-        newPassword,
+        currentPassword: data.currentPassword,
+        newPassword: data.newPassword,
       });
 
       if (response.success) {
-        setCurrentPassword('');
-        setNewPassword('');
-        setConfirmPassword('');
+        passwordForm.reset();
         toast({
           title: 'Password changed',
           description: 'Your password has been changed. Please log in again.',
@@ -263,8 +269,10 @@ export default function AccountPage() {
                       size="sm"
                       className="dark:bg-slate-700 dark:border-slate-600 dark:text-white dark:hover:bg-slate-600"
                       onClick={() => {
-                        setEditName(user.name);
-                        setEditAvatarUrl(user.avatar_url || '');
+                        profileForm.reset({
+                          name: user.name,
+                          avatarUrl: user.avatar_url || '',
+                        });
                         setIsEditing(true);
                       }}
                     >
@@ -277,14 +285,17 @@ export default function AccountPage() {
                         variant="outline"
                         size="sm"
                         className="dark:bg-transparent dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-800"
-                        onClick={() => setIsEditing(false)}
+                        onClick={() => {
+                          setIsEditing(false);
+                          profileForm.clearErrors();
+                        }}
                       >
                         <X className="w-4 h-4 mr-2" />
                         Cancel
                       </Button>
                       <Button
                         size="sm"
-                        onClick={handleSaveProfile}
+                        onClick={profileForm.handleSubmit(handleSaveProfile)}
                         disabled={isSaving}
                         className="bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white shadow-sm"
                       >
@@ -324,21 +335,29 @@ export default function AccountPage() {
                           <Label htmlFor="name" className="dark:text-slate-200">Name</Label>
                           <Input
                             id="name"
-                            value={editName}
-                            onChange={(e) => setEditName(e.target.value)}
+                            {...profileForm.register('name')}
                             placeholder="Your name"
-                            className="bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white dark:placeholder:text-slate-400"
+                            className={`bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white dark:placeholder:text-slate-400 ${
+                              profileForm.formState.errors.name ? 'border-red-500' : ''
+                            }`}
                           />
+                          {profileForm.formState.errors.name && (
+                            <p className="text-sm text-red-500">{profileForm.formState.errors.name.message}</p>
+                          )}
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="avatar" className="dark:text-slate-200">Avatar URL</Label>
                           <Input
                             id="avatar"
-                            value={editAvatarUrl}
-                            onChange={(e) => setEditAvatarUrl(e.target.value)}
+                            {...profileForm.register('avatarUrl')}
                             placeholder="https://example.com/avatar.jpg"
-                            className="bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white"
+                            className={`bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white ${
+                              profileForm.formState.errors.avatarUrl ? 'border-red-500' : ''
+                            }`}
                           />
+                          {profileForm.formState.errors.avatarUrl && (
+                            <p className="text-sm text-red-500">{profileForm.formState.errors.avatarUrl.message}</p>
+                          )}
                         </div>
                       </>
                     ) : (
@@ -379,11 +398,15 @@ export default function AccountPage() {
                   <Input
                     id="current-password"
                     type="password"
-                    value={currentPassword}
-                    onChange={(e) => setCurrentPassword(e.target.value)}
+                    {...passwordForm.register('currentPassword')}
                     placeholder="Enter current password"
-                    className="bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white"
+                    className={`bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white ${
+                      passwordForm.formState.errors.currentPassword ? 'border-red-500' : ''
+                    }`}
                   />
+                  {passwordForm.formState.errors.currentPassword && (
+                    <p className="text-sm text-red-500">{passwordForm.formState.errors.currentPassword.message}</p>
+                  )}
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
@@ -391,33 +414,36 @@ export default function AccountPage() {
                     <Input
                       id="new-password"
                       type="password"
-                      value={newPassword}
-                      onChange={(e) => setNewPassword(e.target.value)}
+                      {...passwordForm.register('newPassword')}
                       placeholder="Enter new password"
-                      className="bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white"
+                      className={`bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white ${
+                        passwordForm.formState.errors.newPassword ? 'border-red-500' : ''
+                      }`}
                     />
+                    {passwordForm.formState.errors.newPassword && (
+                      <p className="text-sm text-red-500">{passwordForm.formState.errors.newPassword.message}</p>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="confirm-password" className="dark:text-slate-200">Confirm New Password</Label>
                     <Input
                       id="confirm-password"
                       type="password"
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      {...passwordForm.register('confirmPassword')}
                       placeholder="Confirm new password"
-                      className="bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white dark:placeholder:text-slate-400"
+                      className={`bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white dark:placeholder:text-slate-400 ${
+                        passwordForm.formState.errors.confirmPassword ? 'border-red-500' : ''
+                      }`}
                     />
+                    {passwordForm.formState.errors.confirmPassword && (
+                      <p className="text-sm text-red-500">{passwordForm.formState.errors.confirmPassword.message}</p>
+                    )}
                   </div>
                 </div>
                 <Button
-                  onClick={handleChangePassword}
+                  onClick={passwordForm.handleSubmit(handleChangePassword)}
                   className="bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-700 hover:to-violet-700 text-white shadow-md w-full sm:w-auto"
-                  disabled={
-                    isChangingPassword ||
-                    !currentPassword ||
-                    !newPassword ||
-                    !confirmPassword
-                  }
+                  disabled={isChangingPassword}
                 >
                   {isChangingPassword ? (
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
