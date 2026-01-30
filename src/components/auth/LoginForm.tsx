@@ -53,8 +53,8 @@ export default function LoginForm() {
                 return;
             }
 
-            if (response.access_token && response.refresh_token && response.user) {
-                login(response.access_token, response.refresh_token, response.user);
+            if (response.data?.access_token && response.data?.refresh_token && response.data?.user) {
+                login(response.data.access_token, response.data.refresh_token, response.data.user);
                 toast.success("Logged in successfully!");
                 // Redirect to returnTo URL or dashboard
                 router.push(returnTo);

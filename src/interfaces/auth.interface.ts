@@ -1,3 +1,5 @@
+import { IApiResponse } from './api.interface';
+
 export interface IUser {
   id: string;
   email: string;
@@ -8,32 +10,21 @@ export interface IUser {
   updated_at: string;
 }
 
-export interface IRegisterResponse {
-  success: boolean;
-  message: string;
+export interface IRegisterData {
   user_id?: string;
 }
 
-export interface IAuthResponse {
-  success: boolean;
-  message: string;
+export interface IAuthData {
   access_token?: string;
   refresh_token?: string;
   user?: IUser;
+  user_id?: string;
 }
 
-export interface ISimpleResponse {
-  success: boolean;
-  message: string;
+export interface IUserData {
+  user: IUser;
 }
 
-export interface IUserResponse {
-  success: boolean;
-  message: string;
-  user?: IUser;
-}
-
-// Settings interfaces
 export interface IUserSettings {
   dark_mode: boolean;
   auto_refresh: boolean;
@@ -42,8 +33,16 @@ export interface IUserSettings {
   blocked_senders: string[];
 }
 
-export interface ISettingsResponse {
-  success: boolean;
-  message: string;
-  settings?: IUserSettings;
+export interface ISettingsData {
+  settings: IUserSettings;
 }
+
+// Responses
+export type IRegisterResponse = IApiResponse<IRegisterData | null>;
+export type IAuthResponse = IApiResponse<IAuthData | null>;
+export type ISimpleResponse = IApiResponse<null>;
+export type IUserResponse = IApiResponse<IAuthData | null>; 
+
+export type IUserResponseTyped = IApiResponse<IUserData | null>;
+
+export type ISettingsResponse = IApiResponse<ISettingsData>;

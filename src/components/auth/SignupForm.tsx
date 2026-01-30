@@ -65,8 +65,8 @@ export default function SignupForm() {
             toast.success("Account created! Please verify your email.");
             
             // Redirect to verify page with userId
-            if (response.user_id) {
-                router.push(`/verify?userId=${response.user_id}&email=${encodeURIComponent(values.email)}`);
+            if (response.data?.user_id) {
+                router.push(`/verify?userId=${response.data?.user_id}&email=${encodeURIComponent(values.email)}`);
             } else {
                 router.push('/verify');
             }
