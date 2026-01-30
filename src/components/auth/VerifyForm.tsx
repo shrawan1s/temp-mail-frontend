@@ -55,8 +55,8 @@ export default function VerifyForm() {
                 return;
             }
 
-            if (response.access_token && response.refresh_token && response.user) {
-                login(response.access_token, response.refresh_token, response.user);
+            if (response.data?.access_token && response.data?.refresh_token && response.data?.user) {
+                login(response.data?.access_token, response.data?.refresh_token, response.data?.user);
                 toast.success('Account verified!', { description: 'Welcome aboard!' });
                 router.push('/dashboard');
             }

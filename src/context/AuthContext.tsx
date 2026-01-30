@@ -36,8 +36,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
         try {
             const response = await authApi.getMe();
-            if (response.success && response.user) {
-                setUser(response.user);
+            if (response.success && response.data?.user) {
+                setUser(response.data?.user);
             } else {
                 tokenStorage.clearTokens();
                 setUser(null);

@@ -8,7 +8,10 @@ export const authApi = {
   },
 
   verifyEmail: async (data: { userId: string; code: string }) => {
-    return api.post<IAuthResponse>('/auth/verify-email', data);
+    return api.post<IAuthResponse>('/auth/verify-email', {
+      user_id: data.userId,
+      code: data.code,
+    });
   },
 
   resendVerification: async (data: { email: string }) => {
@@ -24,7 +27,7 @@ export const authApi = {
   },
 
   refreshToken: async (refreshToken: string) => {
-    return api.post<IAuthResponse>('/auth/refresh', { refreshToken });
+    return api.post<IAuthResponse>('/auth/refresh', { refresh_token: refreshToken });
   },
 
   requestPasswordReset: async (data: { email: string }) => {
@@ -32,15 +35,18 @@ export const authApi = {
   },
 
   oauthLogin: async (data: { provider: string; code: string; redirectUri: string }) => {
-    return api.post<IAuthResponse>(`/auth/oauth/${data.provider}`, {
+    return api.post<IAuthResponse>('/auth/oauth', {
       provider: data.provider,
       code: data.code,
-      redirectUri: data.redirectUri,
+      redirect_uri: data.redirectUri,
     });
   },
 
   resetPassword: async (data: { token: string; newPassword: string }) => {
-    return api.post<ISimpleResponse>('/auth/password-reset/confirm', data);
+    return api.post<ISimpleResponse>('/auth/password-reset/confirm', {
+      token: data.token,
+      new_password: data.newPassword,
+    });
   },
 
   getMe: async () => {
@@ -48,7 +54,10 @@ export const authApi = {
   },
 
   updateMe: async (data: { name?: string; avatarUrl?: string }) => {
-    return api.put<IUserResponse>('/auth/me', data);
+    return api.put<IUserResponse>('/auth/me', {
+      name: data.name,
+      avatar_url: data.avatarUrl,
+    });
   },
 
   // Settings
@@ -63,12 +72,21 @@ export const authApi = {
     notifications?: boolean;
     blockedSenders?: string[];
   }) => {
-    return api.put<ISettingsResponse>('/auth/settings', data);
+    return api.put<ISettingsResponse>('/auth/settings', {
+      dark_mode: data.darkMode,
+      auto_refresh: data.autoRefresh,
+      email_expiry: data.emailExpiry,
+      notifications: data.notifications,
+      blocked_senders: data.blockedSenders,
+    });
   },
 
   // Account Management
   changePassword: async (data: { currentPassword: string; newPassword: string }) => {
-    return api.post<ISimpleResponse>('/auth/change-password', data);
+    return api.post<ISimpleResponse>('/auth/change-password', {
+      current_password: data.currentPassword,
+      new_password: data.newPassword,
+    });
   },
 
   deleteAccount: async (data: { password?: string }) => {

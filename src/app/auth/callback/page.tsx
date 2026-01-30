@@ -44,8 +44,8 @@ export default function OAuthCallbackPage() {
                     redirectUri: redirectUri,
                 })
 
-                if (response.success && response.access_token && response.refresh_token && response.user) {
-                    login(response.access_token, response.refresh_token, response.user)
+                if (response.success && response.data?.access_token && response.data?.refresh_token && response.data?.user) {
+                    login(response.data.access_token, response.data.refresh_token, response.data.user)
                     toast.success('Logged in successfully!')
                     router.push('/dashboard')
                 } else {
