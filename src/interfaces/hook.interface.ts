@@ -7,6 +7,7 @@ import { BillingCycle } from '@/enums';
 export interface IUseRazorpayOptions {
     onSuccess?: (response: IVerifyPaymentResponse) => void;
     onError?: (error: Error) => void;
+    onCancel?: () => void;
 }
 
 /**
@@ -14,7 +15,6 @@ export interface IUseRazorpayOptions {
  */
 export interface IUseRazorpayReturn {
     initiatePayment: (
-        userId: string,
         planId: string,
         billingCycle: BillingCycle,
         planName: string

@@ -3,7 +3,7 @@ import {
   ICreateOrderResponse, 
   IVerifyPaymentResponse, 
   ISubscription,
-  IPlansResponse 
+  IApiResponse 
 } from '@/interfaces';
 import { api } from './api';
 
@@ -13,46 +13,52 @@ export const paymentApi = {
    * Get all available plans (public endpoint)
    */
   getPlans: async (): Promise<IPlan[]> => {
-    const response = await api.get<IPlansResponse>('/payment/plans');
-    return response.plans;
+    const response = await api.get<IApiResponse<{ plans: IPlan[] }>>('/payment/plans');
+    return response.data.plans;
   },
 
   /**
    * Create a Razorpay order
+   * Note: userId is automatically extracted from the auth token on the backend
    */
   createOrder: async (
-    userId: string,
     planId: string,
     billingCycle: 'monthly' | 'annual'
   ): Promise<ICreateOrderResponse> => {
-    return api.post<ICreateOrderResponse>('/payment/create-order', {
-      userId,
+    const response = await api.post<IApiResponse<ICreateOrderResponse>>('/payment/create-order', {
       planId,
       billingCycle,
     });
+    return response.data;
   },
 
   /**
    * Verify payment after Razorpay checkout
+   * Note: userId is automatically extracted from the auth token on the backend
    */
   verifyPayment: async (
     orderId: string,
     paymentId: string,
-    signature: string,
-    userId: string
+    signature: string
   ): Promise<IVerifyPaymentResponse> => {
-    return api.post<IVerifyPaymentResponse>('/payment/verify', {
+    const response = await api.post<IApiResponse<{ planKey: string; expiresAt: string }>>('/payment/verify', {
       orderId,
       paymentId,
       signature,
-      userId,
     });
+    return {
+      success: true,
+      message: 'Payment verified',
+      planKey: response.data.planKey,
+      expiresAt: response.data.expiresAt,
+    };
   },
 
   /**
    * Get user's current subscription
    */
   getSubscription: async (): Promise<ISubscription> => {
-    return api.get<ISubscription>('/payment/subscription');
+    const response = await api.get<IApiResponse<ISubscription>>('/payment/subscription');
+    return response.data;
   },
 };

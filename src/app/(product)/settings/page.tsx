@@ -87,7 +87,11 @@ export default function SettingsPage() {
         }
       } catch (error) {
         console.error('Failed to load settings:', error);
-        // Use defaults if loading fails
+        toast({
+          title: 'Error',
+          description: 'Failed to load settings. Using defaults.',
+          variant: 'destructive',
+        });
       } finally {
         setIsLoading(false);
       }
@@ -98,7 +102,7 @@ export default function SettingsPage() {
     } else if (!isAuthLoading) {
       setIsLoading(false);
     }
-  }, [isAuthLoading, user]);
+  }, [isAuthLoading, user, mounted, setTheme, toast]);
 
   const handleSave = async () => {
     setIsSaving(true);
@@ -345,9 +349,8 @@ export default function SettingsPage() {
                         placeholder="Enter email address to block"
                         {...blockedSenderForm.register('email')}
                         onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), blockedSenderForm.handleSubmit(addBlockedSender)())}
-                        className={`bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white ${
-                          blockedSenderForm.formState.errors.email ? 'border-red-500' : ''
-                        }`}
+                        className={`bg-white dark:bg-slate-950 dark:border-slate-700 dark:text-white ${blockedSenderForm.formState.errors.email ? 'border-red-500' : ''
+                          }`}
                       />
                       <Button onClick={() => blockedSenderForm.handleSubmit(addBlockedSender)()}>Block</Button>
                     </div>

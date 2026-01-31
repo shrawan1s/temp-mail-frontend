@@ -89,6 +89,7 @@ const PremiumPlans = () => {
   const [billing, setBilling] = useState<BillingCycle>(BillingCycle.MONTHLY);
   const [plans, setPlans] = useState<IPlan[]>(fallbackPlans);
   const [subscription, setSubscription] = useState<ISubscription | null>(null);
+  const [loadingSubscription, setLoadingSubscription] = useState(false);
   const [processingPlanId, setProcessingPlanId] = useState<string | null>(null);
   const reduce = useReducedMotion();
   const { toast } = useToast();
@@ -130,6 +131,9 @@ const PremiumPlans = () => {
         variant: 'destructive',
       });
     },
+    onCancel: () => {
+      setProcessingPlanId(null);
+    },
   });
 
   // Fetch plans from API
@@ -152,13 +156,17 @@ const PremiumPlans = () => {
     async function fetchSubscription() {
       if (!isAuthenticated) {
         setSubscription(null);
+        setLoadingSubscription(false);
         return;
       }
+      setLoadingSubscription(true);
       try {
         const sub = await paymentApi.getSubscription();
         setSubscription(sub);
       } catch (error) {
         console.error('Failed to fetch subscription:', error);
+      } finally {
+        setLoadingSubscription(false);
       }
     }
     fetchSubscription();
@@ -232,7 +240,7 @@ const PremiumPlans = () => {
     }
 
     setProcessingPlanId(plan.id);
-    await initiatePayment(user.id, plan.id, billing, plan.name);
+    await initiatePayment(plan.id, billing, plan.name);
   };
 
   // Get CTA config based on plan status
@@ -412,7 +420,7 @@ const PremiumPlans = () => {
                               : ''
                         }`}
                         variant={isCurrentPlan ? 'secondary' : isPopular ? 'default' : 'outline'}
-                        disabled={ctaConfig.disabled || isProcessing || paymentLoading}
+                        disabled={ctaConfig.disabled || isProcessing || paymentLoading || loadingSubscription}
                         onClick={() => handleSelectPlan(plan)}
                       >
                         {isProcessing ? (
