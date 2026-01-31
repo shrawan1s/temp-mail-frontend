@@ -68,10 +68,10 @@ class ApiClient {
         return false;
       }
 
-      const data: IAuthResponse = await response.json();
+      const result: IAuthResponse = await response.json();
 
-      if (data.success && data.access_token && data.refresh_token) {
-        this.setTokens(data.access_token, data.refresh_token);
+      if (result.success && result.data?.access_token && result.data?.refresh_token) {
+        this.setTokens(result.data.access_token, result.data.refresh_token);
         return true;
       }
 

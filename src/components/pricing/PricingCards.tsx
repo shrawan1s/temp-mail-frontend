@@ -85,6 +85,7 @@ export default function PricingCards() {
     const [plans, setPlans] = useState<IPlan[]>(fallbackPlans)
     const [subscription, setSubscription] = useState<ISubscription | null>(null)
     const [loadingPlans, setLoadingPlans] = useState(true)
+    const [loadingSubscription, setLoadingSubscription] = useState(false)
     const [processingPlanId, setProcessingPlanId] = useState<string | null>(null)
     const reduce = useReducedMotion()
     const { toast } = useToast()
@@ -126,6 +127,9 @@ export default function PricingCards() {
                 variant: 'destructive',
             })
         },
+        onCancel: () => {
+            setProcessingPlanId(null)
+        },
     })
 
     // Fetch plans from API
@@ -150,13 +154,17 @@ export default function PricingCards() {
         async function fetchSubscription() {
             if (!isAuthenticated) {
                 setSubscription(null)
+                setLoadingSubscription(false)
                 return
             }
+            setLoadingSubscription(true)
             try {
                 const sub = await paymentApi.getSubscription()
                 setSubscription(sub)
             } catch (error) {
                 console.error('Failed to fetch subscription:', error)
+            } finally {
+                setLoadingSubscription(false)
             }
         }
         fetchSubscription()
@@ -224,7 +232,7 @@ export default function PricingCards() {
         }
 
         setProcessingPlanId(plan.id)
-        await initiatePayment(user.id, plan.id, billing, plan.name)
+        await initiatePayment(plan.id, billing, plan.name)
     }
 
     // Motion variants for price swap
@@ -399,7 +407,7 @@ export default function PricingCards() {
                                                 className={`w-full ${isPopular && !isCurrentPlan ? 'bg-gradient-to-r from-blue-600 to-violet-600 text-white' : ''}`}
                                                 variant={ctaConfig.variant}
                                                 onClick={() => handleSelectPlan(plan)}
-                                                disabled={ctaConfig.disabled || isProcessing || paymentLoading}
+                                                disabled={ctaConfig.disabled || isProcessing || paymentLoading || loadingSubscription}
                                             >
                                                 {isProcessing ? (
                                                     <>

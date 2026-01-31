@@ -9,6 +9,7 @@ import {
     IRazorpayConstructor,
     IUseRazorpayOptions
 } from '@/interfaces';
+import { BillingCycle } from '@/enums';
 
 declare global {
     interface Window {
@@ -36,7 +37,7 @@ export function useRazorpay(options: IUseRazorpayOptions = {}) {
     }, []);
 
     const initiatePayment = useCallback(
-        async (userId: string, planId: string, billingCycle: 'monthly' | 'annual', planName: string) => {
+        async (planId: string, billingCycle: BillingCycle, planName: string) => {
             setIsLoading(true);
             setError(null);
 
@@ -48,7 +49,7 @@ export function useRazorpay(options: IUseRazorpayOptions = {}) {
                 }
 
                 // Create order via centralized API client (includes auth token)
-                const orderData = await paymentApi.createOrder(userId, planId, billingCycle);
+                const orderData = await paymentApi.createOrder(planId, billingCycle);
 
                 // Open Razorpay checkout
                 const razorpayOptions: IRazorpayOptions = {
@@ -56,7 +57,7 @@ export function useRazorpay(options: IUseRazorpayOptions = {}) {
                     amount: orderData.amount,
                     currency: orderData.currency,
                     name: 'Temp Email',
-                    description: `${planName} Plan - ${billingCycle === 'annual' ? 'Annual' : 'Monthly'}`,
+                    description: `${planName} Plan - ${billingCycle === BillingCycle.ANNUAL ? 'Annual' : 'Monthly'}`,
                     order_id: orderData.orderId,
                     handler: async (response: IRazorpayPaymentResponse) => {
                         try {
@@ -64,8 +65,7 @@ export function useRazorpay(options: IUseRazorpayOptions = {}) {
                             const result = await paymentApi.verifyPayment(
                                 response.razorpay_order_id,
                                 response.razorpay_payment_id,
-                                response.razorpay_signature,
-                                userId
+                                response.razorpay_signature
                             );
 
                             if (result.success) {
@@ -92,6 +92,7 @@ export function useRazorpay(options: IUseRazorpayOptions = {}) {
                     modal: {
                         ondismiss: () => {
                             setIsLoading(false);
+                            options.onCancel?.();
                         },
                     },
                 };
