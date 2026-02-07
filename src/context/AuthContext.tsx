@@ -1,6 +1,7 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
+import { useTheme } from 'next-themes';
 import { authApi, tokenStorage } from '@/lib/auth';
 import { IAuthContextType } from '@/interfaces';
 import { IUser } from '@/interfaces';
@@ -10,12 +11,27 @@ const AuthContext = createContext<IAuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<IUser | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const { setTheme } = useTheme();
 
     const isAuthenticated = !!user;
 
-    const login = (accessToken: string, refreshToken: string, userData: IUser) => {
+    const syncSettings = useCallback(async () => {
+        try {
+            const response = await authApi.getSettings();
+            if (response.success && response.data?.settings) {
+                if (response.data.settings.dark_mode !== undefined) {
+                    setTheme(response.data.settings.dark_mode ? 'dark' : 'light');
+                }
+            }
+        } catch (error) {
+            console.error('Failed to sync settings:', error);
+        }
+    }, [setTheme]);
+
+    const login = async (accessToken: string, refreshToken: string, userData: IUser) => {
         tokenStorage.setTokens(accessToken, refreshToken);
         setUser(userData);
+        await syncSettings();
     };
 
     const logout = async () => {
@@ -56,6 +72,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             setIsLoading(false);
         };
         initAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

@@ -5,14 +5,14 @@ export default function Footer() {
   const footerLinks = {
     Product: [
       { name: 'Features', href: '/#features' },
-      { name: 'Pricing', href: '/plans' },
+      { name: 'Pricing', href: '/pricing' },
       { name: 'API', href: '/coming-soon' },
       { name: 'Status', href: '/coming-soon' },
     ],
     Company: [
       { name: 'About', href: '/about' },
       { name: 'Contact', href: '/contact' },
-      { name: 'Pricing', href: '/plans' },
+      { name: 'Pricing', href: '/pricing' },
       { name: 'API Docs', href: '/coming-soon' },
     ],
     Legal: [
