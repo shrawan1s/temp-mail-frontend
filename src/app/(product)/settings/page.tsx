@@ -80,10 +80,6 @@ export default function SettingsPage() {
           setNotifications(response.data.settings.notifications);
           setEmailExpiry(response.data.settings.email_expiry);
           setBlockedSenders(response.data.settings.blocked_senders || []);
-          // Sync theme from settings if saved
-          if (response.data.settings.dark_mode !== undefined && mounted) {
-            setTheme(response.data.settings.dark_mode ? 'dark' : 'light');
-          }
         }
       } catch (error) {
         console.error('Failed to load settings:', error);
@@ -102,7 +98,7 @@ export default function SettingsPage() {
     } else if (!isAuthLoading) {
       setIsLoading(false);
     }
-  }, [isAuthLoading, user, mounted, setTheme, toast]);
+  }, [isAuthLoading, user, toast]);
 
   const handleSave = async () => {
     setIsSaving(true);
