@@ -6,3 +6,4 @@ export * from './hook.interface';
 export * from './payment.interface';
 export * from './razorpay.interface';
 export * from './validation.interface';
+export * from './ad.interface';

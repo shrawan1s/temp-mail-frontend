@@ -10,6 +10,7 @@ import { Separator } from '@/components/ui/separator';
 import { RefreshCw, Copy, Trash2, Clock, Mail, Shield, AlertTriangle, Tag, Settings } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Header } from '@/components/layout';
+import AdSidebar from '@/components/ads/AdSidebar';
 
 interface Email {
   id: string
@@ -115,10 +116,10 @@ export default function InboxPage() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <Header />
 
-      <div className="container mx-auto px-4 pt-20">
-        <div className="grid lg:grid-cols-3 gap-6 h-[calc(100vh-6rem)]">
+      <div className="container mx-auto px-4 pt-20 pb-6">
+        <div className="grid lg:grid-cols-3 gap-6 min-h-[calc(100vh-6rem)]">
           {/* Sidebar */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="lg:col-span-1 space-y-6 overflow-y-auto max-h-[calc(100vh-6rem)]">
             {/* Current Email */}
             <Card className="dark:bg-slate-800 dark:border-slate-700">
               <CardHeader>
@@ -237,17 +238,8 @@ export default function InboxPage() {
               </CardContent>
             </Card>
 
-            {/* Ads Component for Free Users */}
-            <Card className="border-dashed border-2 border-slate-200 dark:border-slate-700 dark:bg-slate-800">
-              <CardContent className="p-4 text-center">
-                <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">
-                  Remove ads with Premium
-                </p>
-                <Button size="sm" variant="outline">
-                  Upgrade Now
-                </Button>
-              </CardContent>
-            </Card>
+            {/* Ad Component for Free Users */}
+            <AdSidebar />
           </div>
 
           {/* Email Preview */}
