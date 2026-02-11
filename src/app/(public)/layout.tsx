@@ -19,8 +19,7 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
             </main>
             <Suspense fallback={<FooterSkeleton />}>
                 <Footer />
-            </Suspense >
+            </Suspense>
         </div>
     )
 }
-                            
